@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  // .header__nav
+  &__nav {
+    color: black;
+    text-decoration: none;
+    
+    // .header__nav--active
+    &--active {
+      color: red;
+    }
+  }
+}
