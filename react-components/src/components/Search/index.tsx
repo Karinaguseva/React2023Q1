@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
+import { SetSearch } from '../../types/search';
 
-class Search extends Component {
+interface SearchProps {
+  search: string;
+  setSearch: SetSearch;
+}
+
+class Search extends Component<SearchProps> {
   render() {
     return (
       <input
         className="view-control__search"
         placeholder="найти..."
         type="search"
-        // value={searchParams.get('search') || ''}
-        // onChange={searchHandler}
+        value={this.props.search}
+        onChange={this.props.setSearch}
       ></input>
     );
   }
