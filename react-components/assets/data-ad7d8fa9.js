@@ -1,0 +1,1 @@
+const t=[{id:1,name:'Часы "Ажур"',category:"часы",categoryID:"watch",price:3300,count:2},{id:2,name:"Гирлянда из звёздочек",category:"праздничный декор",categoryID:"decor",count:1},{id:3,name:"Плейсмат (сервировочная салфетка)",category:"изделия для кухни",categoryID:"kitchen",count:4}];export{t as default};
