@@ -6,31 +6,16 @@ interface CardProps {
   data: ICard;
 }
 
-interface CardState {
-  src: string;
-}
-
 class Card extends Component<CardProps> {
-  state: CardState;
-  constructor(props: CardProps) {
-    super(props);
-    this.state = { src: '' };
-  }
-
-  loadImage(imageName: string) {
-    import('./../../../data/' + imageName).then((image) => {
-      this.setState({
-        src: image.default,
-      });
-    });
-  }
-
   render() {
-    this.loadImage(this.props.data.image);
     return (
       <div className="card">
         <div className="card__header">
-          <img src={this.state.src} alt={this.props.data.title} className="card__img"></img>
+          <img
+            src={import.meta.env.BASE_URL + '/assets/' + this.props.data.image}
+            alt={this.props.data.title}
+            className="card__img"
+          ></img>
           <div>
             <div className="card__title">{this.props.data.title}</div>
             <div className="card__description">
