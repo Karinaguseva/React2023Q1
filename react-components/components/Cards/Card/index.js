@@ -7,7 +7,7 @@ class Card extends Component {
         this.state = { src: '' };
     }
     loadImage(imageName) {
-        import('https://karinaguseva.github.io/React2023Q1/react-components/data/' + imageName).then((image) => {
+        import('./../../../data/' + imageName).then((image) => {
             this.setState({
                 src: image.default,
             });
@@ -17,7 +17,7 @@ class Card extends Component {
         this.loadImage(this.props.data.image);
         return (React.createElement("div", { className: "card" },
             React.createElement("div", { className: "card__header" },
-                React.createElement("img", { src: this.state.src, alt: this.props.data.title, className: "card__img" }),
+                React.createElement("img", { src: this.props.data.image, alt: this.props.data.title, className: "card__img" }),
                 React.createElement("div", null,
                     React.createElement("div", { className: "card__title" }, this.props.data.title),
                     React.createElement("div", { className: "card__description" },
