@@ -1,0 +1,24 @@
+body {
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 228, 196, 0.636);
+}
+
+#root {
+  padding: 0 10px;
+  background-image: url(./../../data/images/mainBg.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  background-attachment: scroll;
+  overflow: hidden overlay;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

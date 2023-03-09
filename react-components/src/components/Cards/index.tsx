@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card as ICard } from 'types/card';
 import Card from './Card';
+import './index.scss';
 
 interface CardsProps {
   search: string;
@@ -29,7 +30,8 @@ class Cards extends Component<CardsProps> {
   filterCards() {
     const filteredCards = this.state.cards.filter((card) => {
       let render = false;
-      if (card.name.toLowerCase().includes(this.props.search.toLowerCase())) render = true;
+      if (card.title.toLowerCase().includes(this.props.search.toLowerCase())) render = true;
+      if (card.ingredient.toLowerCase().includes(this.props.search.toLowerCase())) render = true;
       return render;
     });
     return filteredCards;
@@ -38,10 +40,14 @@ class Cards extends Component<CardsProps> {
   render() {
     const totalCards = this.props.search ? this.filterCards() : this.state.cards;
     if (totalCards.length === 0) {
-      return <div>Карточки не найдены</div>;
+      return (
+        <div className="cards__error">
+          <p className="error__text">No such cards</p>
+        </div>
+      );
     }
     return (
-      <div>
+      <div className="cards">
         {totalCards.map((card) => {
           return <Card data={card} key={card.id} />;
         })}

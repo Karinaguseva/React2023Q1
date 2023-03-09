@@ -2,15 +2,18 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin: 30px 20px;
+  font-family: 'AnimalesFantastic';
 
   // .header__nav
   &__nav {
-    color: black;
+    color: bisque;
     text-decoration: none;
-    
+    font-size: 30px;
+
     // .header__nav--active
     &--active {
-      color: red;
+      color: rgb(124, 189, 255);
     }
   }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { SetSearch } from '../../types/search';
+import './index.scss';
 
 interface SearchProps {
   search: string;
@@ -9,13 +10,15 @@ interface SearchProps {
 class Search extends Component<SearchProps> {
   render() {
     return (
-      <input
-        className="view-control__search"
-        placeholder="найти..."
-        type="search"
-        value={this.props.search}
-        onChange={this.props.setSearch}
-      ></input>
+      <div className="search">
+        <input
+          className="search__input"
+          placeholder="Find beast..."
+          type="search"
+          value={this.props.search}
+          onChange={this.props.setSearch}
+        ></input>
+      </div>
     );
   }
 }

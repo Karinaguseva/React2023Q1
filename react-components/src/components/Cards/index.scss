@@ -1,0 +1,28 @@
+.cards {
+display: flex;
+align-items: center;
+justify-content: center;
+flex-wrap: wrap;
+gap: 20px;
+
+&__error {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    font-family: 'GlamySunriseRegular';
+    letter-spacing: 2px;
+
+    &__text {
+      background-color: rgba(23, 31, 39, 0.8);
+      color: bisque;
+      padding: 50px;
+      text-align: center;
+      width: 50%;
+      border-radius: 10px;
+    }
+  }
+
+
+}

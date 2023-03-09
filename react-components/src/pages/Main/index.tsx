@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Search from 'components/Search';
 import Cards from '../../components/Cards';
+import './index.scss';
 
 interface MainState {
   search: string;
@@ -40,10 +41,10 @@ class Main extends Component {
 
   render() {
     return (
-      <>
+      <main className="main">
         <Search search={this.state.search} setSearch={this.setSearch}></Search>
         <Cards search={this.state.search} />
-      </>
+      </main>
     );
   }
 }
