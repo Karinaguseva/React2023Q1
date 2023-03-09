@@ -6,7 +6,7 @@
         "ingredient": "Puffskein Fur",
         "prerequisite": "Must complete main story quest \"The Elf, the Nab-sack, and the Loom\"",
         "cost": 150,
-        "image": "./Puffskein.jpg"
+        "image": "images/Puffskein.jpg?import"
     },
     {
         "id": 1,
@@ -15,7 +15,7 @@
         "ingredient": "Fwooper Feather",
         "prerequisite": "Must complete main story quest \"The Elf, the Nab-sack, and the Loom\"",
         "cost": 250,
-        "image": "./Fwooper.jpg"
+        "image": "images/Fwooper.jpg"
     },
     {
         "id": 2,
@@ -24,7 +24,7 @@
         "ingredient": "Jobberknoll Feather",
         "prerequisite": "Must complete main story quest \"The Elf, the Nab-sack, and the Loom\"",
         "cost": 150,
-        "image": "./Jobberknoll.jpg"
+        "image": "images/Jobberknoll.jpg"
     },
     {
         "id": 3,
@@ -33,7 +33,7 @@
         "ingredient": "Graphorn Horn",
         "prerequisite": "Must complete main story quest \"San Bakar's Trial\"",
         "cost": 700,
-        "image": "./Graphorn.jpg"
+        "image": "images/Graphorn.jpg"
     },
     {
         "id": 4,
@@ -42,7 +42,7 @@
         "ingredient": "Mooncalf Fur",
         "prerequisite": "Must complete main story quest \"The Elf, the Nab-sack, and the Loom\"",
         "cost": 150,
-        "image": "./Mooncalf.jpg"
+        "image": "images/Mooncalf.jpg"
     },
     {
         "id": 5,
@@ -51,7 +51,7 @@
         "ingredient": "Unicorn Hair",
         "prerequisite": "Must complete main story quest \"The Elf, the Nab-sack, and the Loom\"",
         "cost": 700,
-        "image": "./Unicorn.jpg"
+        "image": "images/Unicorn.jpg"
     },
     {
         "id": 6,
@@ -60,7 +60,7 @@
         "ingredient": "Niffler Fur",
         "prerequisite": "Must complete main story quest \"The Elf, the Nab-sack, and the Loom\"",
         "cost": 250,
-        "image": "./Niffler.jpg"
+        "image": "images/Niffler.jpg"
     },
     {
         "id": 7,
@@ -69,7 +69,7 @@
         "ingredient": "Toad Warts",
         "prerequisite": "Must complete main story quest \"The Elf, the Nab-sack, and the Loom\"",
         "cost": 400,
-        "image": "./Toad.jpg"
+        "image": "images/Toad.jpg"
     },
     {
         "id": 8,
@@ -78,7 +78,7 @@
         "ingredient": "Thestral Hair",
         "prerequisite": "Must complete main story quest \"The Elf, the Nab-sack, and the Loom\"",
         "cost": 400,
-        "image": "./Thestral.jpg"
+        "image": "images/Thestral.jpg"
     },
     {
         "id": 9,
@@ -87,7 +87,7 @@
         "ingredient": "Hippogriff Feather",
         "prerequisite": "Must complete main story quest \"The High Keep\"",
         "cost": 700,
-        "image": "./Hippogriff.jpg"
+        "image": "images/Hippogriff.jpg"
     },
     {
         "id": 10,
@@ -96,7 +96,7 @@
         "ingredient": "Kneazle Fur",
         "prerequisite": "Must complete main story quest \"The Elf, the Nab-sack, and the Loom\"",
         "cost": 400,
-        "image": "./Kneazle.jpg"
+        "image": "images/Kneazle.jpg"
     },
     {
         "id": 11,
@@ -105,7 +105,7 @@
         "ingredient": "Diricawl Feather",
         "prerequisite": "Must complete main story quest \"The Elf, the Nab-sack, and the Loom\"",
         "cost": 250,
-        "image": "./Diricawl.jpg"
+        "image": "images/Diricawl.jpg"
     },
     {
         "id": 12,
@@ -114,6 +114,6 @@
         "ingredient": "Phoenix Feather",
         "prerequisite": "Must complete the side quest \"Phoenix Rising\"",
         "cost": 700,
-        "image": "./Phoenix.jpg"
+        "image": "images/Phoenix.jpg"
     }
 ]
