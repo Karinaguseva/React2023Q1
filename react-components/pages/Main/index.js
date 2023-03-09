@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Search from 'components/Search';
 import Cards from '../../components/Cards';
+import './index.scss';
 class Main extends Component {
     state;
     constructor(props) {
@@ -27,7 +28,7 @@ class Main extends Component {
         localStorage.setItem('search.value', this.state.search);
     }
     render() {
-        return (React.createElement(React.Fragment, null,
+        return (React.createElement("main", { className: "main" },
             React.createElement(Search, { search: this.state.search, setSearch: this.setSearch }),
             React.createElement(Cards, { search: this.state.search })));
     }

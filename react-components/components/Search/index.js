@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import './index.scss';
 class Search extends Component {
     render() {
-        return (React.createElement("input", { className: "view-control__search", placeholder: "\u043D\u0430\u0439\u0442\u0438...", type: "search", value: this.props.search, onChange: this.props.setSearch }));
+        return (React.createElement("div", { className: "search" },
+            React.createElement("input", { className: "search__input", placeholder: "Find beast...", type: "search", value: this.props.search, onChange: this.props.setSearch })));
     }
 }
 export default Search;

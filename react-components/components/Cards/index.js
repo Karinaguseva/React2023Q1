@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Card from './Card';
+import './index.scss';
 class Cards extends Component {
     state;
     constructor(props) {
@@ -16,7 +17,9 @@ class Cards extends Component {
     filterCards() {
         const filteredCards = this.state.cards.filter((card) => {
             let render = false;
-            if (card.name.toLowerCase().includes(this.props.search.toLowerCase()))
+            if (card.title.toLowerCase().includes(this.props.search.toLowerCase()))
+                render = true;
+            if (card.ingredient.toLowerCase().includes(this.props.search.toLowerCase()))
                 render = true;
             return render;
         });
@@ -25,9 +28,10 @@ class Cards extends Component {
     render() {
         const totalCards = this.props.search ? this.filterCards() : this.state.cards;
         if (totalCards.length === 0) {
-            return React.createElement("div", null, "\u041A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u044B");
+            return (React.createElement("div", { className: "cards__error" },
+                React.createElement("p", { className: "error__text" }, "No such cards")));
         }
-        return (React.createElement("div", null, totalCards.map((card) => {
+        return (React.createElement("div", { className: "cards" }, totalCards.map((card) => {
             return React.createElement(Card, { data: card, key: card.id });
         })));
     }
