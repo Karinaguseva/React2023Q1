@@ -17,16 +17,11 @@ class Card extends Component {
     //   return new URL(`${name}`, import.meta.url).href;
     // }
     render() {
-        // const baseUrl = new URL(import.meta.env.BASE_URL, import.meta.url).href;
-        const imgUrl = new URL(this.props.data.image, import.meta.url).href;
-        // const url = new URL(this.props.data.image, imgUrl).href;
-        console.log(import.meta.url);
-        console.log(import.meta.env.BASE_URL);
-        console.log(this.props.data.image);
+        // const imgUrl = new URL(this.props.data.image, import.meta.url).href;
         // this.loadImage(this.props.data.image);
         return (React.createElement("div", { className: "card" },
             React.createElement("div", { className: "card__header" },
-                React.createElement("img", { src: imgUrl, alt: this.props.data.title, className: "card__img" }),
+                React.createElement("img", { src: import.meta.env.BASE_URL + '/assets/' + this.props.data.image, alt: this.props.data.title, className: "card__img" }),
                 React.createElement("div", null,
                     React.createElement("div", { className: "card__title" }, this.props.data.title),
                     React.createElement("div", { className: "card__description" },
