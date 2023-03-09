@@ -7,7 +7,7 @@ class Card extends Component {
         this.state = { src: '' };
     }
     loadImage(imageName) {
-        import('React2023Q1/react-components/data/' + imageName).then((image) => {
+        import('/../../data/' + imageName).then((image) => {
             this.setState({
                 src: image.default,
             });
