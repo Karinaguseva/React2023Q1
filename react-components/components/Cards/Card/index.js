@@ -7,7 +7,7 @@ class Card extends Component {
         this.state = { src: '' };
     }
     loadImage(imageName) {
-        import('./../../../../public/data' + imageName).then((image) => {
+        import('./../../../../public/data/' + imageName).then((image) => {
             this.setState({
                 src: image.default,
             });
