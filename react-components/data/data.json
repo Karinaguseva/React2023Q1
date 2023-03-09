@@ -6,7 +6,7 @@
         "ingredient": "Puffskein Fur",
         "prerequisite": "Must complete main story quest \"The Elf, the Nab-sack, and the Loom\"",
         "cost": 150,
-        "image": "./../../../data/images/Puffskein.jpg"
+        "image": "images/Puffskein.jpg"
     },
     {
         "id": 1,
