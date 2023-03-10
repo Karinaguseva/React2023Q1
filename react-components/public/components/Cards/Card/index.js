@@ -1,24 +1,7 @@
 import React, { Component } from 'react';
 import './index.scss';
 class Card extends Component {
-    state;
-    constructor(props) {
-        super(props);
-        this.state = { src: '' };
-    }
-    loadImage(imageName) {
-        import('./../../../data/' + imageName).then((image) => {
-            this.setState({
-                src: image.default,
-            });
-        });
-    }
-    // getImgUrl(name: string) {
-    //   return new URL(`${name}`, import.meta.url).href;
-    // }
     render() {
-        // const imgUrl = new URL(this.props.data.image, import.meta.url).href;
-        // this.loadImage(this.props.data.image);
         return (React.createElement("div", { className: "card" },
             React.createElement("div", { className: "card__header" },
                 React.createElement("img", { src: import.meta.env.BASE_URL + '/assets/' + this.props.data.image, alt: this.props.data.title, className: "card__img" }),

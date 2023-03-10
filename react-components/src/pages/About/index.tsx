@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
+import './index.scss';
 
 class About extends Component {
   render() {
-    return (
-      <div>
-        About
-        <a href="#"></a>{' '}
-      </div>
-    );
+    return <div className="about">About</div>;
   }
 }
 
