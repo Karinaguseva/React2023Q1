@@ -4,6 +4,15 @@
   align-items: center;
   margin: 30px 20px;
   font-family: 'AnimalesFantastic';
+  flex-wrap: wrap;
+  color: bisque;
+
+  &__title{
+    width: 100%;
+    text-align: center;
+    margin: 0 0 10px;
+    font-weight: 500;
+  }
 
   // .header__nav
   &__nav {
