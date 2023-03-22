@@ -13,6 +13,7 @@ import Root from './Root';
 import './styles/style.css';
 
 import ROUTES from 'types/routes';
+import Forms from './pages/Forms/index';
 
 const router = createHashRouter(
   createRoutesFromElements(
@@ -20,6 +21,7 @@ const router = createHashRouter(
       <Route errorElement={<NotFound404 />}>
         <Route path={ROUTES.MAIN} element={<Main />}></Route>
         <Route path={ROUTES.ABOUT} element={<About />}></Route>
+        <Route path={ROUTES.FORMS} element={<Forms />}></Route>
       </Route>
     </Route>
   )
