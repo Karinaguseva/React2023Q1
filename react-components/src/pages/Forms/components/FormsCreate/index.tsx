@@ -4,7 +4,7 @@ import './index.scss';
 class FormsCreate extends Component {
   render() {
     return (
-      <div className="forms">
+      <form className="forms">
         <div className="input__wrapper">
           <label className="forms__label" htmlFor="name">
             Name
@@ -69,7 +69,6 @@ class FormsCreate extends Component {
             <option>Slytherin</option>
           </select>
         </div>
-
         <label className="input-file">
           <input type="file" accept="image/jpeg,image/png,image/gif"></input>
           <span>Сhoose File</span>
@@ -81,7 +80,7 @@ class FormsCreate extends Component {
           </label>
         </div>
         <button className="forms__button">Submit</button>
-      </div>
+      </form>
     );
   }
 }
