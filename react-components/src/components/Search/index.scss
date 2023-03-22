@@ -1,0 +1,30 @@
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+
+  &__input {
+    width: 40%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: bisque;
+    color: rgb(21, 62, 90);
+    font-family: 'GlamySunriseRegular';
+    letter-spacing: 2px;
+    font-size: 16px;
+
+    &::placeholder {
+      color: rgba(21, 62, 90, 0.515);
+      font-weight: 700;
+    }
+  }
+
+  &__input:active,
+  :hover,
+  :focus {
+    outline: 0;
+    outline-offset: 0;
+  }
+}

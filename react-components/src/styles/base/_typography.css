@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'AnimalesFantastic';
+  src: url('./../fonts/AnimalesFantastic-lGly.ttf'), url('../fonts/GlamySunriseRegular-BWOKl.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GlamySunriseRegular';
+  src: url('../fonts/GlamySunriseRegular-BWOKl.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
