@@ -1,5 +1,5 @@
 .form-card {
-  max-width: 300px;
+  min-width: 300px;
   min-height: 290px;
   background-color: rgba(23, 31, 39, 0.9);
   color: bisque;
@@ -65,6 +65,7 @@
     margin: 0;
   }
 }
+
 .item {
   width: 33%;
   display: flex;

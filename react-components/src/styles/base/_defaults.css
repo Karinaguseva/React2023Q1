@@ -1,4 +1,12 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
+  margin: 0;
+}
+
+p {
   margin: 0;
 }
 
@@ -21,4 +29,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.main {
+  flex: 1 1 auto;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }

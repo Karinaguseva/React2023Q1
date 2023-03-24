@@ -1,10 +1,10 @@
-export type Card = {
+export type BeastCard = {
   id: number;
   image: string;
   title: string;
-  birth: Date;
+  birth: string;
   description: string;
   ingredient: string;
-  cost: number;
+  cost: string;
   house: string;
 };
