@@ -8,7 +8,8 @@ class CardForm extends Component {
         }
         return this.props.cards.map((card) => {
             return (React.createElement("div", { className: "form-card", key: card.id },
-                React.createElement("img", { src: card.image, alt: card.title, className: "form-card__img" }),
+                React.createElement("div", { className: "form-card__img" },
+                    React.createElement("img", { src: card.image, alt: card.title, className: "form-card__img" })),
                 React.createElement("div", { className: "form-card__title" }, card.title),
                 React.createElement("div", { className: "form-card__birth birth" },
                     React.createElement("p", { className: "birth__title" }, "Birth:"),
