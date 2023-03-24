@@ -35,7 +35,6 @@ class Forms extends Component {
   }
 
   render() {
-    console.log(this.state.cards.length);
     return (
       <div className="main">
         <FormData handleCard={this.handleCard} cards={this.state.cards.length} />
