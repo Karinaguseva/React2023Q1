@@ -25,7 +25,6 @@ class Forms extends Component {
             }, 3000);
     }
     render() {
-        console.log(this.state.cards.length);
         return (React.createElement("div", { className: "main" },
             React.createElement(FormData, { handleCard: this.handleCard, cards: this.state.cards.length }),
             React.createElement("div", { className: "forms__cards" },
