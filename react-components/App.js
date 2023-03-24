@@ -7,10 +7,12 @@ import NotFound404 from 'pages/NotFound404';
 import Root from './Root';
 import './styles/style.css';
 import ROUTES from 'types/routes';
+import Forms from './pages/Forms/index';
 const router = createHashRouter(createRoutesFromElements(React.createElement(Route, { path: ROUTES.MAIN, element: React.createElement(Root, null), errorElement: React.createElement(NotFound404, null) },
     React.createElement(Route, { errorElement: React.createElement(NotFound404, null) },
         React.createElement(Route, { path: ROUTES.MAIN, element: React.createElement(Main, null) }),
-        React.createElement(Route, { path: ROUTES.ABOUT, element: React.createElement(About, null) })))));
+        React.createElement(Route, { path: ROUTES.ABOUT, element: React.createElement(About, null) }),
+        React.createElement(Route, { path: ROUTES.FORMS, element: React.createElement(Forms, null) })))));
 const root = document.getElementById('root');
 if (root)
     ReactDOM.createRoot(root).render(React.createElement(RouterProvider, { router: router }));

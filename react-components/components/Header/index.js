@@ -8,9 +8,11 @@ class Header extends Component {
             React.createElement("h1", { className: "header__title" },
                 React.createElement(Routes, null,
                     React.createElement(Route, { path: "/", element: "Main page" }),
-                    React.createElement(Route, { path: "/about", element: "About page" }))),
+                    React.createElement(Route, { path: "/about", element: "About page" }),
+                    React.createElement(Route, { path: "/forms", element: "Forms page" }))),
             React.createElement(NavLink, { to: ROUTES.MAIN, className: ({ isActive }) => 'header__nav' + (isActive ? ' header__nav--active' : '') }, "Main"),
-            React.createElement(NavLink, { to: ROUTES.ABOUT, className: ({ isActive }) => 'header__nav' + (isActive ? ' header__nav--active' : '') }, "About")));
+            React.createElement(NavLink, { to: ROUTES.ABOUT, className: ({ isActive }) => 'header__nav' + (isActive ? ' header__nav--active' : '') }, "About"),
+            React.createElement(NavLink, { to: ROUTES.FORMS, className: ({ isActive }) => 'header__nav' + (isActive ? ' header__nav--active' : '') }, "Forms")));
     }
 }
 export default Header;
