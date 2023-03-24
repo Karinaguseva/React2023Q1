@@ -6,6 +6,7 @@
   border: thick double rgba(124, 189, 255, 0.641);
   border-radius: 10px;
   overflow: hidden overlay;
+  flex:  0 0 20%;
 
   &__img {
     object-fit: cover;
@@ -15,7 +16,7 @@
 
   &__title {
     font-size: 25px;
-    margin-bottom: 10px;
+    margin: 10px;
     font-family: 'GlamySunriseRegular';
     letter-spacing: 2px;
     color: rgb(124, 189, 255);
@@ -25,9 +26,10 @@
 
   &__description {
     text-align: justify;
-    max-height: 150px;
+    height: 55px;
     overflow: hidden overlay;
     padding: 0 20px;
+    margin-bottom: 10px;
   }
 
   &__span {

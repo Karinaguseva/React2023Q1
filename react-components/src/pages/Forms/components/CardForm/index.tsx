@@ -18,7 +18,9 @@ class CardForm extends Component<CardFormProps> {
     return this.props.cards.map((card) => {
       return (
         <div className="form-card" key={card.id}>
-          <img src={card.image} alt={card.title} className="form-card__img"></img>
+          <div className="form-card__img">
+            <img src={card.image} alt={card.title} className="form-card__img"></img>
+          </div>
           <div className="form-card__title">{card.title}</div>
           <div className="form-card__birth birth">
             <p className="birth__title">Birth:</p>
