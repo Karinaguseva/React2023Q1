@@ -65,12 +65,6 @@ class FormData extends Component {
         else if (desc.split(' ').length < 3) {
             errorArray.desc = 'Should contains 3 words';
         }
-        else if (desc
-            .trim()
-            .split(' ')
-            .some((word) => word.length < 5)) {
-            errorArray.desc = 'Words should be longer then 5 symbols';
-        }
         else {
             errorArray.desc = '';
         }
@@ -80,7 +74,7 @@ class FormData extends Component {
             errorArray.date = 'Required field';
         }
         else if (Date.parse(date) >= Date.parse(curent)) {
-            errorArray.date = 'Date should be earlier than today';
+            errorArray.date = `Date should be earlier than ${curent.replace(/^(\d+)-(\d+)-(\d+)$/, `$3.$2.$1`)}`;
         }
         else {
             errorArray.date = '';
@@ -133,7 +127,7 @@ class FormData extends Component {
     render() {
         const ingridients = ['Fur', 'Feather', 'Horn', 'Hair'];
         const error = 'Required field';
-        return (React.createElement("form", { className: "forms", onSubmit: this.handleSubmit, ref: this.formRef },
+        return (React.createElement("form", { className: "forms", onSubmit: this.handleSubmit, ref: this.formRef, noValidate: true },
             React.createElement("div", { className: "input__wrapper" },
                 React.createElement("div", { className: "input__label-wrapper" },
                     React.createElement("label", { className: "forms__label", htmlFor: "name" }, "Name"),
