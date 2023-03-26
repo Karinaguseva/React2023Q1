@@ -7,13 +7,14 @@ class CardForm extends Component {
                 React.createElement("p", { className: "error__text" }, "Cards not found")));
         }
         return this.props.cards.map((card) => {
+            const cardBirth = card.birth.replace(/^(\d+)-(\d+)-(\d+)$/, `$3.$2.$1`);
             return (React.createElement("div", { className: "form-card", key: card.id },
                 React.createElement("div", { className: "form-card__img" },
                     React.createElement("img", { src: card.image, alt: card.title, className: "form-card__img" })),
                 React.createElement("div", { className: "form-card__title" }, card.title),
                 React.createElement("div", { className: "form-card__birth birth" },
                     React.createElement("p", { className: "birth__title" }, "Birth:"),
-                    React.createElement("p", { className: "birth__text" }, card.birth)),
+                    React.createElement("p", { className: "birth__text" }, cardBirth)),
                 React.createElement("div", { className: "form-card__description" },
                     React.createElement("span", { className: "form-card__span" }, "Description:"),
                     " ",
