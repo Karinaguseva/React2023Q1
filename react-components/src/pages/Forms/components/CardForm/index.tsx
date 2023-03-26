@@ -16,6 +16,7 @@ class CardForm extends Component<CardFormProps> {
       );
     }
     return this.props.cards.map((card) => {
+      const cardBirth = card.birth.replace(/^(\d+)-(\d+)-(\d+)$/, `$3.$2.$1`);
       return (
         <div className="form-card" key={card.id}>
           <div className="form-card__img">
@@ -24,7 +25,7 @@ class CardForm extends Component<CardFormProps> {
           <div className="form-card__title">{card.title}</div>
           <div className="form-card__birth birth">
             <p className="birth__title">Birth:</p>
-            <p className="birth__text">{card.birth}</p>
+            <p className="birth__text">{cardBirth}</p>
           </div>
           <div className="form-card__description">
             <span className="form-card__span">Description:</span> {card.description}
