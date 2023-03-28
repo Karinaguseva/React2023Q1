@@ -38,7 +38,7 @@ const FormData = ({ handleCard, cards }: FormDataProps) => {
     reset();
   };
 
-  const ingridients = ['Fur', 'Feather', 'Horn', 'Hair'];
+  const ingredients = ['Fur', 'Feather', 'Horn', 'Hair'];
   const error = 'Required field';
   const curent = new Date().toISOString().slice(0, 10);
   return (
@@ -104,15 +104,15 @@ const FormData = ({ handleCard, cards }: FormDataProps) => {
           {errors.ingredient && <p className="input__error">{errors.ingredient?.message}</p>}
         </div>
         <div>
-          {ingridients.map((ingridient, index) => {
+          {ingredients.map((ingredient, index) => {
             return (
               <label className="radio__label" key={index}>
                 <input
                   {...register('ingredient', { required: error })}
                   type="radio"
-                  value={ingridient}
+                  value={ingredient}
                 />
-                {ingridient}
+                {ingredient}
               </label>
             );
           })}
@@ -121,7 +121,7 @@ const FormData = ({ handleCard, cards }: FormDataProps) => {
       <div className="input__wrapper">
         <div className="input__label-wrapper">
           <label className="forms__label" htmlFor="cost">
-            Ingridient cost
+            Ingredient cost
           </label>
           {errors.cost && <p className="input__error">{errors.cost?.message}</p>}
         </div>
