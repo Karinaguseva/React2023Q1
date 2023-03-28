@@ -1,279 +1,185 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form/dist/types';
 import { BeastCard } from '../../../../types/beastCard';
 import './index.scss';
-
-interface FormDataState {
-  errors: {
-    name: string;
-    desc: string;
-    date: string;
-    radio: boolean;
-    cost: string;
-    select: boolean;
-    file: string;
-    checkbox: boolean;
-  };
-}
 
 interface FormDataProps {
   handleCard: (card: BeastCard) => void;
   cards: number;
 }
 
-class FormData extends Component<FormDataProps> {
-  state: FormDataState;
-  formRef: React.RefObject<HTMLFormElement> = React.createRef<HTMLFormElement>();
-  inputNameRef: React.RefObject<HTMLInputElement> = React.createRef<HTMLInputElement>();
-  inputDescRef: React.RefObject<HTMLInputElement> = React.createRef<HTMLInputElement>();
-  inputDateRef: React.RefObject<HTMLInputElement> = React.createRef<HTMLInputElement>();
-  inputRadioRefs = [
-    React.createRef<HTMLInputElement>(),
-    React.createRef<HTMLInputElement>(),
-    React.createRef<HTMLInputElement>(),
-    React.createRef<HTMLInputElement>(),
-  ];
-  inputCostRef: React.RefObject<HTMLInputElement> = React.createRef<HTMLInputElement>();
-  inputSelectRef: React.RefObject<HTMLSelectElement> = React.createRef<HTMLSelectElement>();
-  inputFileRef: React.RefObject<HTMLInputElement> = React.createRef<HTMLInputElement>();
-  inputCheckboxRef: React.RefObject<HTMLInputElement> = React.createRef<HTMLInputElement>();
+const FormData = ({ handleCard, cards }: FormDataProps) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    watch,
+  } = useForm<BeastCard>({ mode: 'onSubmit', reValidateMode: 'onSubmit' });
 
-  constructor(props: FormDataProps) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {
-      errors: {
-        name: '',
-        desc: '',
-        date: '',
-        radio: false,
-        cost: '',
-        select: false,
-        file: '',
-        checkbox: false,
-      },
-    };
-  }
+  const onSubmit: SubmitHandler<BeastCard> = (data) => {
+    const files = data.image;
+    const file = files ? files[0] : null;
+    console.log(watch('image'));
+    const picture = file ? URL.createObjectURL(file) : '';
 
-  handleSubmit(event: React.FormEvent) {
-    event.preventDefault();
-    const name = this.inputNameRef.current?.value;
-    const desc = this.inputDescRef.current?.value;
-    const date = this.inputDateRef.current?.value;
-    const radio = this.inputRadioRefs.reduce((acc, ref) => {
-      if (ref.current?.checked) acc = ref.current?.value;
-      return acc;
-    }, '');
-    const cost = this.inputCostRef.current?.value;
-    const select = this.inputSelectRef.current?.value;
-    const file = this.inputFileRef.current?.value;
-    const files = this.inputFileRef.current?.files?.[0];
-    const checkbox = this.inputCheckboxRef.current?.checked;
-    const errorArray = { ...this.state.errors };
+    handleCard({
+      id: cards,
+      image: picture,
+      title: data.title || '',
+      birth: data.birth || '',
+      description: data.description || '',
+      ingredient: data.ingredient || '',
+      cost: data.cost || '',
+      house: data.house || '',
+      checkbox: data.checkbox,
+    });
+    reset();
+  };
 
-    //Name Validation
-    if (!name) {
-      errorArray.name = 'Required field';
-    } else if (name[0] !== name[0].toUpperCase()) {
-      errorArray.name = 'Should starts with uppercased letter';
-    } else {
-      errorArray.name = '';
-    }
-
-    //Description Validation
-    if (!desc) {
-      errorArray.desc = 'Required field';
-    } else if (desc.split(' ').length < 3) {
-      errorArray.desc = 'Should contains 3 words';
-    } else {
-      errorArray.desc = '';
-    }
-
-    //Date Validation
-    const curent = new Date().toISOString().slice(0, 10);
-    if (!date) {
-      errorArray.date = 'Required field';
-    } else if (Date.parse(date!) >= Date.parse(curent)) {
-      errorArray.date = `Date should be earlier than ${curent.replace(
-        /^(\d+)-(\d+)-(\d+)$/,
-        `$3.$2.$1`
-      )}`;
-    } else {
-      errorArray.date = '';
-    }
-
-    //Radio-btn Validation
-    errorArray.radio = !radio;
-
-    //Cost Validation
-    if (!cost) {
-      errorArray.cost = 'Required field';
-    } else if (!/^[0-9]{1,}$/.test(cost)) {
-      errorArray.cost = 'Should be positive';
-    } else if (cost === '0') {
-      errorArray.cost = 'Should be more than 0';
-    } else {
-      errorArray.cost = '';
-    }
-
-    //Select Validation
-    errorArray.select = !select;
-
-    //File Validation
-    if (!file) {
-      errorArray.file = 'Required field';
-    } else if (!files?.type.startsWith('image/')) {
-      errorArray.file = 'Selected file is not an image';
-    } else {
-      errorArray.file = '';
-    }
-
-    //Checkbox Validation
-    errorArray.checkbox = !checkbox;
-    this.setState({ errors: errorArray });
-    if (Object.values(errorArray).every((value) => !value)) {
-      const image = files ? URL.createObjectURL(files) : '';
-      this.props.handleCard({
-        id: this.props.cards,
-        image: image,
-        title: name || '',
-        birth: date || '',
-        description: desc || '',
-        ingredient: radio || '',
-        cost: cost || '',
-        house: select || '',
-      });
-      this.formRef.current?.reset();
-    }
-  }
-
-  render() {
-    const ingridients = ['Fur', 'Feather', 'Horn', 'Hair'];
-    const error = 'Required field';
-    return (
-      <form className="forms" onSubmit={this.handleSubmit} ref={this.formRef} noValidate>
-        <div className="input__wrapper">
-          <div className="input__label-wrapper">
-            <label className="forms__label" htmlFor="name">
-              Name
-            </label>
-            {this.state.errors.name && <p className="input__error">{this.state.errors.name}</p>}
-          </div>
-          <input
-            type="text"
-            placeholder="Beast Name"
-            className="forms__input name"
-            id="name"
-            ref={this.inputNameRef}
-          ></input>
+  const ingridients = ['Fur', 'Feather', 'Horn', 'Hair'];
+  const error = 'Required field';
+  const curent = new Date().toISOString().slice(0, 10);
+  return (
+    <form className="forms" onSubmit={handleSubmit(onSubmit)} noValidate>
+      <div className="input__wrapper">
+        <div className="input__label-wrapper">
+          <label className="forms__label" htmlFor="name">
+            Name
+          </label>
+          {errors.title && <p className="input__error">{errors.title?.message}</p>}
         </div>
-        <div className="input__wrapper">
-          <div className="input__label-wrapper">
-            <label className="forms__label" htmlFor="description">
-              Description
-            </label>
-            {this.state.errors.desc && <p className="input__error">{this.state.errors.desc}</p>}
-          </div>
-          <input
-            type="text"
-            placeholder="Beast Description"
-            className="forms__input description"
-            id="description"
-            ref={this.inputDescRef}
-          ></input>
+        <input
+          {...register('title', {
+            required: error,
+            pattern: { value: /^[A-ZА-Я]{1}.*$/, message: 'Should starts with uppercased letter' },
+          })}
+          type="text"
+          placeholder="Beast Name"
+          className="forms__input name"
+          id="name"
+        ></input>
+      </div>
+      <div className="input__wrapper">
+        <div className="input__label-wrapper">
+          <label className="forms__label" htmlFor="description">
+            Description
+          </label>
+          {errors.description && <p className="input__error">{errors.description?.message}</p>}
         </div>
-        <div className="input__wrapper">
-          <div className="input__label-wrapper">
-            <label className="forms__label" htmlFor="date">
-              Beast birth
-            </label>
-            {this.state.errors.date && <p className="input__error">{this.state.errors.date}</p>}
-          </div>
-          <input
-            type="date"
-            className="forms__input date"
-            id="date"
-            ref={this.inputDateRef}
-          ></input>
+        <input
+          {...register('description', {
+            required: error,
+            validate: (value) => value.split(' ').length >= 3 || 'Should contains 3 words',
+          })}
+          type="text"
+          placeholder="Beast Description"
+          className="forms__input description"
+          id="description"
+        ></input>
+      </div>
+      <div className="input__wrapper">
+        <div className="input__label-wrapper">
+          <label className="forms__label" htmlFor="date">
+            Beast birth
+          </label>
+          {errors.birth && <p className="input__error">{errors.birth?.message}</p>}
         </div>
-        <div className="input__wrapper">
-          <div className="input__label-wrapper">
-            <label className="forms__label">What gives your Beast</label>
-            {this.state.errors.radio && <p className="input__error">{error}</p>}
-          </div>
-          <div>
-            {ingridients.map((ingridient, index) => {
-              return (
-                <label className="radio__label" key={index}>
-                  <input
-                    type="radio"
-                    name="ingridient"
-                    ref={this.inputRadioRefs[index]}
-                    value={ingridient}
-                  />
-                  {ingridient}
-                </label>
-              );
-            })}
-          </div>
+        <input
+          {...register('birth', {
+            required: error,
+            validate: (value) =>
+              Date.parse(value!) <= Date.parse(curent) ||
+              `Date should be earlier than ${curent.replace(/^(\d+)-(\d+)-(\d+)$/, `$3.$2.$1`)}`,
+          })}
+          type="date"
+          className="forms__input date"
+          id="date"
+        ></input>
+      </div>
+      <div className="input__wrapper">
+        <div className="input__label-wrapper">
+          <label className="forms__label">What gives your Beast</label>
+          {errors.ingredient && <p className="input__error">{errors.ingredient?.message}</p>}
         </div>
-        <div className="input__wrapper">
-          <div className="input__label-wrapper">
-            <label className="forms__label" htmlFor="cost">
-              Ingridient cost
-            </label>
-            {this.state.errors.cost && <p className="input__error">{this.state.errors.cost}</p>}
-          </div>
-          <input
-            type="number"
-            className="forms__input cost"
-            id="cost"
-            ref={this.inputCostRef}
-            placeholder="1000"
-          ></input>
+        <div>
+          {ingridients.map((ingridient, index) => {
+            return (
+              <label className="radio__label" key={index}>
+                <input
+                  {...register('ingredient', { required: error })}
+                  type="radio"
+                  value={ingridient}
+                />
+                {ingridient}
+              </label>
+            );
+          })}
         </div>
-        <div className="input__wrapper">
-          <div className="input__label-wrapper">
-            <label className="forms__label">Select native House</label>
-            {this.state.errors.select && <p className="input__error">{error}</p>}
-          </div>
-          <select className="forms__input house" ref={this.inputSelectRef}>
-            <option hidden value="">
-              Choose the house
-            </option>
-            <option>Gryffindor</option>
-            <option>Ravenclaw</option>
-            <option>Hufflepuff</option>
-            <option>Slytherin</option>
-          </select>
+      </div>
+      <div className="input__wrapper">
+        <div className="input__label-wrapper">
+          <label className="forms__label" htmlFor="cost">
+            Ingridient cost
+          </label>
+          {errors.cost && <p className="input__error">{errors.cost?.message}</p>}
         </div>
-        <div className="input__wrapper">
-          <div className="input__label-wrapper">
-            <label className="input__file">
-              <input
-                type="file"
-                accept="image/jpeg,image/png,image/gif"
-                ref={this.inputFileRef}
-              ></input>
-              <span>Choose File</span>
-            </label>
-            {this.state.errors.file && <p className="input__error">{this.state.errors.file}</p>}
-          </div>
+        <input
+          {...register('cost', {
+            required: error,
+            validate: {
+              positive: (value) => parseInt(value) > 0 || 'Should be greater than 0',
+            },
+          })}
+          type="number"
+          className="forms__input cost"
+          id="cost"
+          placeholder="1000"
+        ></input>
+      </div>
+      <div className="input__wrapper">
+        <div className="input__label-wrapper">
+          <label className="forms__label">Select native House</label>
+          {errors.house && <p className="input__error">{errors.house?.message}</p>}
         </div>
-        <div className="input__wrapper">
-          <div className="input__label-wrapper">
-            <label className="forms__label">
-              <input type="checkbox" ref={this.inputCheckboxRef}></input>
-              I&rsquo;m sure i want to create the Beast
-            </label>
-            {this.state.errors.checkbox && <p className="input__error">{error}</p>}
-          </div>
+        <select {...register('house', { required: error })} className="forms__input house">
+          <option hidden value="">
+            Choose the house
+          </option>
+          <option>Gryffindor</option>
+          <option>Ravenclaw</option>
+          <option>Hufflepuff</option>
+          <option>Slytherin</option>
+        </select>
+      </div>
+      <div className="input__wrapper">
+        <div className="input__label-wrapper">
+          <label className="input__file">
+            <input
+              {...register('image', { required: error })}
+              type="file"
+              accept="image/jpeg,image/png,image/gif"
+            ></input>
+            <span>Choose File</span>
+          </label>
+          {errors.image && <p className="input__error">{errors.image?.message}</p>}
         </div>
-        <button className="forms__button" type="submit">
-          Submit
-        </button>
-      </form>
-    );
-  }
-}
+      </div>
+      <div className="input__wrapper">
+        <div className="input__label-wrapper">
+          <label className="forms__label">
+            <input {...register('checkbox', { required: error })} type="checkbox"></input>
+            I&rsquo;m sure i want to create the Beast
+          </label>
+          {errors.checkbox && <p className="input__error">{errors.checkbox?.message}</p>}
+        </div>
+      </div>
+      <button className="forms__button" type="submit">
+        Submit
+      </button>
+    </form>
+  );
+};
 
 export default FormData;
