@@ -4,6 +4,7 @@ import FormData from './components/FormData/index';
 import { BeastCard } from '../../types/beastCard';
 import CardForm from './components/CardForm';
 import Popup from './../../components/Popup/index';
+import FormData2 from './components/FormData/index copy';
 
 const Forms = () => {
   const [cards, setCards] = useState<BeastCard[]>([]);
@@ -23,7 +24,7 @@ const Forms = () => {
 
   return (
     <div className="main">
-      <FormData handleCard={handleCard} cards={cards.length} />
+      <FormData2 handleCard={handleCard} cards={cards.length} />
       <div className="forms__cards">
         <CardForm cards={cards} />
       </div>

@@ -7,4 +7,5 @@ export type BeastCard = {
   ingredient: string;
   cost: string;
   house: string;
+  checkbox: boolean;
 };
