@@ -8,7 +8,7 @@ const Main = () => {
 
   useEffect(() => {
     return () => {
-      localStorage.setItem('search.value', searchRef.current || '');
+      localStorage.setItem('search.value', searchRef.current);
     };
   }, [searchRef]);
 
