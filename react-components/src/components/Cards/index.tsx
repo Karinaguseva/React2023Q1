@@ -21,7 +21,7 @@ const Cards = ({ search }: CardsProps) => {
   const filterCards = () => {
     const filteredCards = cards.filter((card) => {
       let render = false;
-      if (card.title.toLowerCase().includes(search.toLowerCase())) render = true;
+      if (card.name.toLowerCase().includes(search.toLowerCase())) render = true;
       if (card.ingredient.toLowerCase().includes(search.toLowerCase())) render = true;
       return render;
     });

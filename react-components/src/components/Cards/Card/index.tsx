@@ -12,11 +12,11 @@ const Card = ({ data }: CardProps) => {
       <div className="card__header">
         <img
           src={import.meta.env.BASE_URL + '/assets/' + data.image}
-          alt={data.title}
+          alt={data.name}
           className="card__img"
         ></img>
         <div>
-          <div className="card__title">{data.title}</div>
+          <div className="card__title">{data.name}</div>
           <div className="card__description">
             <span className="card__span">Description:</span> {data.description}
           </div>
