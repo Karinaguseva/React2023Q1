@@ -12,6 +12,7 @@ class Header extends Component {
           <Routes>
             <Route path="/" element="Main page" />
             <Route path="/about" element="About page" />
+            <Route path="/forms" element="Forms page" />
           </Routes>
         </h1>
         <NavLink
@@ -25,6 +26,12 @@ class Header extends Component {
           className={({ isActive }) => 'header__nav' + (isActive ? ' header__nav--active' : '')}
         >
           About
+        </NavLink>
+        <NavLink
+          to={ROUTES.FORMS}
+          className={({ isActive }) => 'header__nav' + (isActive ? ' header__nav--active' : '')}
+        >
+          Forms
         </NavLink>
       </header>
     );

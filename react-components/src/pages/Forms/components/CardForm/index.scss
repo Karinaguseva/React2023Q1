@@ -1,0 +1,96 @@
+.form-card {
+  min-width: 300px;
+  min-height: 290px;
+  background-color: rgba(23, 31, 39, 0.9);
+  color: bisque;
+  border: thick double rgba(124, 189, 255, 0.641);
+  border-radius: 10px;
+  overflow: hidden overlay;
+  flex:  0 0 20%;
+
+  &__img {
+    object-fit: cover;
+    width: 100%;
+    height: 300px;
+  }
+
+  &__title {
+    font-size: 25px;
+    margin: 10px;
+    font-family: 'GlamySunriseRegular';
+    letter-spacing: 2px;
+    color: rgb(124, 189, 255);
+    text-align: center;
+    text-shadow: 2px 1px 1px #000000;
+  }
+
+  &__description {
+    height: 55px;
+    overflow: hidden overlay;
+    padding: 0 20px;
+    margin-bottom: 10px;
+  }
+
+  &__span {
+    font-family: 'GlamySunriseRegular';
+    letter-spacing: 2px;
+    color: rgba(91, 135, 178, 0.8);
+    font-size: 16px;
+  }
+
+  &__info {
+    display: flex;
+    align-items: flex-start;
+    text-align: center;
+    background-color: bisque;
+    height: 68px;
+  }
+
+  &__ingredient,
+  &__cost {
+    border-right: 2px solid rgba(91, 135, 178, 0.8);
+  }
+}
+
+.birth {
+  display: flex;
+  justify-content: center;
+  font-family: 'GlamySunriseRegular';
+  letter-spacing: 2px;
+  color: rgb(91, 134, 178);
+  font-size: 20px;
+  margin-bottom: 10px;
+
+  &__title,
+  &__text {
+    margin: 0;
+  }
+}
+
+.item {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+
+  &__title {
+    font-family: 'GlamySunriseRegular';
+    letter-spacing: 2px;
+    color: rgb(91, 134, 178);
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+  }
+  &__text {
+    color: rgb(91, 134, 178);
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 35rem) {
+  .form-card__header {
+    flex-direction: column;
+    align-items: center;
+  }
+}
