@@ -1,7 +1,6 @@
 export type BeastCardForm = {
   id: number;
-  image: string;
-  imageForm: FileList;
+  image: FileList;
   title: string;
   birth: string;
   description: string;
@@ -11,4 +10,4 @@ export type BeastCardForm = {
   checkbox: boolean;
 };
 
-export type BeastCard = Omit<BeastCardForm, 'imageForm' | 'checkbox'>;
+export type BeastCard = Omit<BeastCardForm, 'image' | 'checkbox'> & { image: string };

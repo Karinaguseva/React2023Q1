@@ -20,7 +20,7 @@ const FormData = ({ handleCard, cards }: FormDataProps) => {
   const onSubmit: SubmitHandler<BeastCardForm> = (data) => {
     handleCard({
       id: cards,
-      image: URL.createObjectURL(data.imageForm[0]),
+      image: URL.createObjectURL(data.image[0]),
       title: data.title || '',
       birth: data.birth || '',
       description: data.description || '',
@@ -154,7 +154,7 @@ const FormData = ({ handleCard, cards }: FormDataProps) => {
           <div className="input__label-wrapper">
             <label className="input__file">
               <input
-                {...register('imageForm', {
+                {...register('image', {
                   required: error,
                   validate: {
                     acceptedFormats: (value) =>
@@ -167,7 +167,7 @@ const FormData = ({ handleCard, cards }: FormDataProps) => {
               ></input>
               <span>Choose File</span>
             </label>
-            {errors.imageForm && <p className="input__error">{errors.imageForm?.message}</p>}
+            {errors.image && <p className="input__error">{errors.image?.message}</p>}
           </div>
         </div>
         <div className="input__wrapper">
