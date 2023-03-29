@@ -17,13 +17,13 @@ const CardForm = ({ cards }: CardFormProps) => {
   return (
     <>
       {cards.map((card) => {
-        const cardBirth = card.birth.replace(/^(\d+)-(\d+)-(\d+)$/, `$3.$2.$1`);
+        const cardBirth = card.date.replace(/^(\d+)-(\d+)-(\d+)$/, `$3.$2.$1`);
         return (
           <div className="form-card" key={card.id}>
             <div className="form-card__img">
-              <img src={card.image} alt={card.title} className="form-card__img"></img>
+              <img src={card.image} alt={card.name} className="form-card__img"></img>
             </div>
-            <div className="form-card__title">{card.title}</div>
+            <div className="form-card__title">{card.name}</div>
             <div className="form-card__birth birth">
               <p className="birth__title">Birth:</p>
               <p className="birth__text">{cardBirth}</p>

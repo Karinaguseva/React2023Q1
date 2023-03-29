@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types';
 import { BeastCard, BeastCardForm } from '../../../../types/beastCard';
 import './index.scss';
+import Input from '../Input';
+import { resolver } from './resolver';
 
 interface FormDataProps {
   handleCard: (card: BeastCard) => void;
@@ -15,132 +17,83 @@ const FormData = ({ handleCard, cards }: FormDataProps) => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<BeastCardForm>({ mode: 'onSubmit', reValidateMode: 'onSubmit' });
+  } = useForm({ resolver, mode: 'onSubmit', reValidateMode: 'onSubmit' });
 
   const onSubmit: SubmitHandler<BeastCardForm> = (data) => {
     handleCard({
       id: cards,
+      ...data,
       image: URL.createObjectURL(data.image[0]),
-      title: data.title || '',
-      birth: data.birth || '',
-      description: data.description || '',
-      ingredient: data.ingredient || '',
-      cost: data.cost || '',
-      house: data.house || '',
     });
     reset();
   };
 
   const ingredients = ['Fur', 'Feather', 'Horn', 'Hair'];
-  const error = 'Required field';
-  const curent = new Date().toISOString().slice(0, 10);
+
   return (
     <>
       <form className="forms" onSubmit={handleSubmit(onSubmit)} noValidate>
-        <div className="input__wrapper">
-          <div className="input__label-wrapper">
-            <label className="forms__label" htmlFor="name">
-              Name
-            </label>
-            {errors.title && <p className="input__error">{errors.title?.message}</p>}
-          </div>
-          <input
-            {...register('title', {
-              required: error,
-              pattern: {
-                value: /^[A-ZА-Я]{1}.*$/,
-                message: 'Should starts with uppercased letter',
-              },
-            })}
-            type="text"
-            placeholder="Beast Name"
-            className="forms__input name"
-            id="name"
-          ></input>
-        </div>
-        <div className="input__wrapper">
-          <div className="input__label-wrapper">
-            <label className="forms__label" htmlFor="description">
-              Description
-            </label>
-            {errors.description && <p className="input__error">{errors.description?.message}</p>}
-          </div>
-          <input
-            {...register('description', {
-              required: error,
-              validate: (value) => value.trim().split(' ').length >= 3 || 'Should contains 3 words',
-            })}
-            type="text"
-            placeholder="Beast Description"
-            className="forms__input description"
-            id="description"
-          ></input>
-        </div>
-        <div className="input__wrapper">
-          <div className="input__label-wrapper">
-            <label className="forms__label" htmlFor="date">
-              Beast birth
-            </label>
-            {errors.birth && <p className="input__error">{errors.birth?.message}</p>}
-          </div>
-          <input
-            {...register('birth', {
-              required: error,
-              validate: (value) =>
-                Date.parse(value!) <= Date.parse(curent) ||
-                `Date should be earlier than ${curent.replace(/^(\d+)-(\d+)-(\d+)$/, `$3.$2.$1`)}`,
-            })}
-            type="date"
-            className="forms__input date"
-            id="date"
-          ></input>
-        </div>
+        <Input
+          register={{
+            ...register('name'),
+          }}
+          name="name"
+          label="Name"
+          errors={errors?.name?.message}
+          type="text"
+          placeholder="Beast Name"
+        />
+        <Input
+          register={{
+            ...register('description'),
+          }}
+          name="description"
+          label="Description"
+          errors={errors?.description?.message}
+          type="text"
+          placeholder="Beast Description"
+        />
+        <Input
+          register={{
+            ...register('date'),
+          }}
+          name="date"
+          label="Beast date"
+          errors={errors?.date?.message}
+          type="date"
+        />
         <div className="input__wrapper">
           <div className="input__label-wrapper">
             <label className="forms__label">What gives your Beast</label>
             {errors.ingredient && <p className="input__error">{errors.ingredient?.message}</p>}
           </div>
           <div>
-            {ingredients.map((ingredient, index) => {
+            {ingredients.map((ingredient) => {
               return (
-                <label className="radio__label" key={index}>
-                  <input
-                    {...register('ingredient', { required: error })}
-                    type="radio"
-                    value={ingredient}
-                  />
+                <label className="radio__label" key={ingredient}>
+                  <input {...register('ingredient')} type="radio" value={ingredient} />
                   {ingredient}
                 </label>
               );
             })}
           </div>
         </div>
-        <div className="input__wrapper">
-          <div className="input__label-wrapper">
-            <label className="forms__label" htmlFor="cost">
-              Ingredient cost
-            </label>
-            {errors.cost && <p className="input__error">{errors.cost?.message}</p>}
-          </div>
-          <input
-            {...register('cost', {
-              required: error,
-              validate: {
-                positive: (value) => parseInt(value) > 0 || 'Should be greater than 0',
-              },
-            })}
-            type="number"
-            className="forms__input cost"
-            id="cost"
-            placeholder="1000"
-          ></input>
-        </div>
+        <Input
+          register={{
+            ...register('cost'),
+          }}
+          name="cost"
+          label="Ingredient cost"
+          errors={errors?.cost?.message}
+          type="number"
+          placeholder="1000"
+        />
         <div className="input__wrapper">
           <div className="input__label-wrapper">
             <label className="forms__label">Select native House</label>
             {errors.house && <p className="input__error">{errors.house?.message}</p>}
           </div>
-          <select {...register('house', { required: error })} className="forms__input house">
+          <select {...register('house')} className="forms__input house">
             <option hidden value="">
               Choose the house
             </option>
@@ -154,14 +107,7 @@ const FormData = ({ handleCard, cards }: FormDataProps) => {
           <div className="input__label-wrapper">
             <label className="input__file">
               <input
-                {...register('image', {
-                  required: error,
-                  validate: {
-                    acceptedFormats: (value) =>
-                      ['image/jpeg', 'image/png', 'image/gif'].includes(value[0]?.type) ||
-                      'Selected file is not an image',
-                  },
-                })}
+                {...register('image')}
                 type="file"
                 accept="image/jpeg,image/png,image/gif"
               ></input>
@@ -173,7 +119,7 @@ const FormData = ({ handleCard, cards }: FormDataProps) => {
         <div className="input__wrapper">
           <div className="input__label-wrapper">
             <label className="forms__label">
-              <input {...register('checkbox', { required: error })} type="checkbox"></input>
+              <input {...register('checkbox')} type="checkbox"></input>
               I&rsquo;m sure i want to create the Beast
             </label>
             {errors.checkbox && <p className="input__error">{errors.checkbox?.message}</p>}
