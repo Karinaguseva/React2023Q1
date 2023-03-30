@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types';
 import { BeastCard, BeastCardForm } from '../../../../types/beastCard';
 import './index.scss';
-import Input from '../Input';
+import InputText from '../InputText';
 import { resolver } from './resolver';
 
 interface FormDataProps {
@@ -33,35 +33,38 @@ const FormData = ({ handleCard, cards }: FormDataProps) => {
   return (
     <>
       <form className="forms" onSubmit={handleSubmit(onSubmit)} noValidate>
-        <Input
+        <InputText
           register={{
             ...register('name'),
           }}
           name="name"
           label="Name"
           errors={errors?.name?.message}
-          type="text"
           placeholder="Beast Name"
         />
-        <Input
+        <InputText
           register={{
             ...register('description'),
           }}
           name="description"
           label="Description"
           errors={errors?.description?.message}
-          type="text"
           placeholder="Beast Description"
         />
-        <Input
-          register={{
-            ...register('date'),
-          }}
-          name="date"
-          label="Beast date"
-          errors={errors?.date?.message}
-          type="date"
-        />
+        <div className="input__wrapper">
+          <div className="input__label-wrapper">
+            <label className="forms__label" htmlFor="date">
+              Beast date
+            </label>
+            {errors && <div className="input__error">{errors.date?.message}</div>}
+          </div>
+          <input
+            {...register('date')}
+            type="date"
+            className={'forms__input date'}
+            id="date"
+          ></input>
+        </div>
         <div className="input__wrapper">
           <div className="input__label-wrapper">
             <label className="forms__label">What gives your Beast</label>
@@ -78,16 +81,21 @@ const FormData = ({ handleCard, cards }: FormDataProps) => {
             })}
           </div>
         </div>
-        <Input
-          register={{
-            ...register('cost'),
-          }}
-          name="cost"
-          label="Ingredient cost"
-          errors={errors?.cost?.message}
-          type="number"
-          placeholder="1000"
-        />
+        <div className="input__wrapper">
+          <div className="input__label-wrapper">
+            <label className="forms__label" htmlFor="cost">
+              Ingredient cost
+            </label>
+            {errors && <div className="input__error">{errors.cost?.message}</div>}
+          </div>
+          <input
+            {...register('cost')}
+            type="number"
+            placeholder="1000"
+            className="forms__input cost"
+            id="cost"
+          ></input>
+        </div>
         <div className="input__wrapper">
           <div className="input__label-wrapper">
             <label className="forms__label">Select native House</label>

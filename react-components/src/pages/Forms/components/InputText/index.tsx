@@ -1,16 +1,15 @@
 import React from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form/dist/types/form';
 
-interface InputProps {
+interface InputTextProps {
   register: UseFormRegisterReturn;
   name: string;
   label: string;
   errors?: string;
-  type: string;
   placeholder?: string;
 }
 
-const Input = ({ register, name, label, errors, type, placeholder }: InputProps) => {
+const InputText = ({ register, name, label, errors, placeholder }: InputTextProps) => {
   return (
     <div className="input__wrapper">
       <div className="input__label-wrapper">
@@ -21,7 +20,7 @@ const Input = ({ register, name, label, errors, type, placeholder }: InputProps)
       </div>
       <input
         {...register}
-        type={type}
+        type="text"
         placeholder={placeholder}
         className={`forms__input ${name}`}
         id={name}
@@ -30,4 +29,4 @@ const Input = ({ register, name, label, errors, type, placeholder }: InputProps)
   );
 };
 
-export default Input;
+export default InputText;
