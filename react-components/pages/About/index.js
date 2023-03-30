@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './index.scss';
-class About extends Component {
-    render() {
-        return React.createElement("div", { className: "about" }, "About");
-    }
-}
+const About = () => {
+    return React.createElement("div", { className: "about" }, "About");
+};
 export default About;

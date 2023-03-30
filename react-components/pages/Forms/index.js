@@ -1,35 +1,25 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.scss';
 import FormData from './components/FormData/index';
 import CardForm from './components/CardForm';
 import Popup from './../../components/Popup/index';
-class Forms extends Component {
-    state;
-    constructor(props) {
-        super(props);
-        this.handleCard = this.handleCard.bind(this);
-        this.state = { cards: [], popup: false };
-    }
-    handleCard(card) {
-        this.setState({
-            cards: [...this.state.cards, card],
-            popup: true,
-        });
-    }
-    componentDidUpdate() {
-        this.state.popup &&
+const Forms = () => {
+    const [cards, setCards] = useState([]);
+    const [popup, setPopup] = useState(false);
+    const handleCard = (card) => {
+        setCards([...cards, card]);
+        setPopup(true);
+    };
+    useEffect(() => {
+        popup &&
             setTimeout(() => {
-                this.setState({
-                    popup: false,
-                });
+                setPopup(false);
             }, 3000);
-    }
-    render() {
-        return (React.createElement("div", { className: "main" },
-            React.createElement(FormData, { handleCard: this.handleCard, cards: this.state.cards.length }),
-            React.createElement("div", { className: "forms__cards" },
-                React.createElement(CardForm, { cards: this.state.cards })),
-            React.createElement(Popup, { showPopup: this.state.popup })));
-    }
-}
+    }, [popup]);
+    return (React.createElement("div", { className: "main" },
+        React.createElement(FormData, { handleCard: handleCard, cards: cards.length }),
+        React.createElement("div", { className: "forms__cards" },
+            React.createElement(CardForm, { cards: cards })),
+        React.createElement(Popup, { showPopup: popup })));
+};
 export default Forms;

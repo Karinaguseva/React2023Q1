@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './index.scss';
-class Search extends Component {
-    render() {
-        return (React.createElement("div", { className: "search" },
-            React.createElement("input", { className: "search__input", placeholder: "Find beast...", type: "search", value: this.props.search, onChange: this.props.setSearch })));
-    }
-}
+const Search = ({ search, setSearch }) => {
+    return (React.createElement("div", { className: "search" },
+        React.createElement("input", { className: "search__input", placeholder: "Find beast...", type: "search", value: search, onChange: setSearch })));
+};
 export default Search;
