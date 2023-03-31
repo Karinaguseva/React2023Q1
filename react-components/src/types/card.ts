@@ -1,6 +1,6 @@
 export type Card = {
   id: number;
-  title: string;
+  name: string;
   description: string;
   ingredient: string;
   prerequisite: string;

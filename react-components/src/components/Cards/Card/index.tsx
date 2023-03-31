@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Card as ICard } from 'types/card';
 import './index.scss';
 
@@ -6,36 +6,34 @@ interface CardProps {
   data: ICard;
 }
 
-class Card extends Component<CardProps> {
-  render() {
-    return (
-      <div className="card">
-        <div className="card__header">
-          <img
-            src={import.meta.env.BASE_URL + '/assets/' + this.props.data.image}
-            alt={this.props.data.title}
-            className="card__img"
-          ></img>
-          <div>
-            <div className="card__title">{this.props.data.title}</div>
-            <div className="card__description">
-              <span className="card__span">Description:</span> {this.props.data.description}
-            </div>
+const Card = ({ data }: CardProps) => {
+  return (
+    <div className="card">
+      <div className="card__header">
+        <img
+          src={import.meta.env.BASE_URL + '/assets/' + data.image}
+          alt={data.name}
+          className="card__img"
+        ></img>
+        <div>
+          <div className="card__title">{data.name}</div>
+          <div className="card__description">
+            <span className="card__span">Description:</span> {data.description}
           </div>
         </div>
-
-        <div className="card__ingredient">
-          <span className="card__span">Ingredient:</span> {this.props.data.ingredient}
-        </div>
-        <div className="card__cost">
-          <span className="card__span">Ingredient cost:</span> {this.props.data.cost} galleons
-        </div>
-        <div className="card__prerequisite">
-          <span className="card__span">Prerequisite:</span> {this.props.data.prerequisite}
-        </div>
       </div>
-    );
-  }
-}
+
+      <div className="card__ingredient">
+        <span className="card__span">Ingredient:</span> {data.ingredient}
+      </div>
+      <div className="card__cost">
+        <span className="card__span">Ingredient cost:</span> {data.cost} galleons
+      </div>
+      <div className="card__prerequisite">
+        <span className="card__span">Prerequisite:</span> {data.prerequisite}
+      </div>
+    </div>
+  );
+};
 
 export default Card;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { SetSearch } from '../../types/search';
 import './index.scss';
 
@@ -7,20 +7,18 @@ interface SearchProps {
   setSearch: SetSearch;
 }
 
-class Search extends Component<SearchProps> {
-  render() {
-    return (
-      <div className="search">
-        <input
-          className="search__input"
-          placeholder="Find beast..."
-          type="search"
-          value={this.props.search}
-          onChange={this.props.setSearch}
-        ></input>
-      </div>
-    );
-  }
-}
+const Search = ({ search, setSearch }: SearchProps) => {
+  return (
+    <div className="search">
+      <input
+        className="search__input"
+        placeholder="Find beast..."
+        type="search"
+        value={search}
+        onChange={setSearch}
+      ></input>
+    </div>
+  );
+};
 
 export default Search;

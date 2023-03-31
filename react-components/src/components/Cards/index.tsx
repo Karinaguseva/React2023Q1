@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card as ICard } from 'types/card';
 import Card from './Card';
 import './index.scss';
@@ -7,53 +7,42 @@ interface CardsProps {
   search: string;
 }
 
-interface CardsState {
-  cards: ICard[];
-}
+const Cards = ({ search }: CardsProps) => {
+  const [cards, setCards] = useState<ICard[]>([]);
+  const data = import('./../../data/data.json');
 
-class Cards extends Component<CardsProps> {
-  state: CardsState;
+  useEffect(() => {
+    async function fetchData() {
+      setCards((await data).default);
+    }
+    fetchData();
+  }, [data]);
 
-  constructor(props: CardsProps) {
-    super(props);
-    this.state = { cards: [] };
-  }
-
-  async componentDidMount() {
-    const data = await import('./../../data/data.json');
-    this.setState({
-      ...this.state,
-      cards: data.default,
-    });
-  }
-
-  filterCards() {
-    const filteredCards = this.state.cards.filter((card) => {
+  const filterCards = () => {
+    const filteredCards = cards.filter((card) => {
       let render = false;
-      if (card.title.toLowerCase().includes(this.props.search.toLowerCase())) render = true;
-      if (card.ingredient.toLowerCase().includes(this.props.search.toLowerCase())) render = true;
+      if (card.name.toLowerCase().includes(search.toLowerCase())) render = true;
+      if (card.ingredient.toLowerCase().includes(search.toLowerCase())) render = true;
       return render;
     });
     return filteredCards;
-  }
+  };
 
-  render() {
-    const totalCards = this.props.search ? this.filterCards() : this.state.cards;
-    if (totalCards.length === 0) {
-      return (
-        <div className="cards__error">
-          <p className="error__text">No such cards</p>
-        </div>
-      );
-    }
+  const totalCards = search ? filterCards() : cards;
+  if (totalCards.length === 0) {
     return (
-      <div className="cards">
-        {totalCards.map((card) => {
-          return <Card data={card} key={card.id} />;
-        })}
+      <div className="cards__error">
+        <p className="error__text">No such cards</p>
       </div>
     );
   }
-}
+  return (
+    <div className="cards">
+      {totalCards.map((card) => {
+        return <Card data={card} key={card.id} />;
+      })}
+    </div>
+  );
+};
 
 export default Cards;

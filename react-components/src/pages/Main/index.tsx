@@ -1,51 +1,28 @@
-import React, { Component } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Search from 'components/Search';
 import Cards from '../../components/Cards';
 
-interface MainState {
-  search: string;
-}
+const Main = () => {
+  const [search, setSearch] = useState(localStorage.getItem('search.value') || '');
+  const searchRef = useRef(search);
 
-class Main extends Component {
-  state: MainState;
+  useEffect(() => {
+    return () => {
+      localStorage.setItem('search.value', searchRef.current);
+    };
+  }, [searchRef]);
 
-  constructor(props: object) {
-    super(props);
-    this.state = { search: '' };
+  const changeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.currentTarget.value);
+    searchRef.current = event.target.value;
+  };
 
-    this.setSearch = this.setSearch.bind(this);
-  }
-
-  setSearch(event: React.ChangeEvent<HTMLInputElement>) {
-    localStorage.setItem('search.value', event.currentTarget.value);
-
-    this.setState({
-      ...this.state,
-      search: event.currentTarget.value,
-    });
-  }
-
-  componentDidMount() {
-    const search = localStorage.getItem('search.value');
-    if (search)
-      this.setState({
-        ...this.state,
-        search,
-      });
-  }
-
-  componentWillUnmount() {
-    localStorage.setItem('search.value', this.state.search);
-  }
-
-  render() {
-    return (
-      <main className="main">
-        <Search search={this.state.search} setSearch={this.setSearch}></Search>
-        <Cards search={this.state.search} />
-      </main>
-    );
-  }
-}
+  return (
+    <main className="main">
+      <Search search={search} setSearch={changeSearch}></Search>
+      <Cards search={search} />
+    </main>
+  );
+};
 
 export default Main;
