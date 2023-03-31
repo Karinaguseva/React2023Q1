@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
 import Footer from '.';
-describe('Header', () => {
+describe('Footer', () => {
     it('has all nessesary elements', () => {
         render(React.createElement(Footer, null));
         const links = screen.getAllByRole('link');

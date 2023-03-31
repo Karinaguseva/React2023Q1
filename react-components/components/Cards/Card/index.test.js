@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Card from '.';
-describe('Cards', () => {
-    it('render cards', () => {
+describe('Card', () => {
+    it('render Card component', () => {
         render(React.createElement(Card, { data: {
                 id: 0,
                 name: 'Puffskein',
