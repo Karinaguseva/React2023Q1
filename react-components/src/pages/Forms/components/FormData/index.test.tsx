@@ -2,7 +2,7 @@ import React from 'react';
 import { screen, render, fireEvent } from '@testing-library/react';
 import FormData from '.';
 
-describe('Search', () => {
+describe('FormData', () => {
   it('renders Forms component', () => {
     render(<FormData handleCard={() => {}} cards={0} />);
     const name = screen.getByPlaceholderText('Beast Name');
