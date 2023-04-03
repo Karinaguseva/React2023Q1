@@ -8,13 +8,12 @@ interface PaginationProps {
 }
 
 const Pagination = ({ pageCount, initialPage, onChange }: PaginationProps) => {
-  console.log('initialPage', initialPage);
-
   const pages = [];
-
+  if (!pageCount) return <></>;
   for (let i = 1; i <= pageCount; i++) {
     pages.push(
       <div
+        key={i}
         onClick={() => onChange(i - 1)}
         className={
           i - 1 === initialPage
