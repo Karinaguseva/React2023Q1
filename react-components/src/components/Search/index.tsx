@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import { SetSearch } from '../../types/search';
 import './index.scss';
+import { useSearchParams } from 'react-router-dom';
 
-interface SearchProps {
-  search: string;
-  setSearch: SetSearch;
-}
+const Search = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const nameParams = searchParams.get('name') || '';
 
-const Search = ({ search, setSearch }: SearchProps) => {
-  const [num, setNum] = useState(search);
-  // const changeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setNum(event.currentTarget.value);
-  //   // searchRef.current = event.target.value;
-  // };
+  const [num, setNum] = useState(nameParams);
+  const applySearch = (name: string) => {
+    if (name) searchParams.set('name', name);
+    else searchParams.delete('name');
+    searchParams.delete('page');
+    setSearchParams(searchParams);
+  };
+
   return (
     <div className="search">
       <input
@@ -21,12 +22,12 @@ const Search = ({ search, setSearch }: SearchProps) => {
         type="text"
         value={num}
         onChange={(event) => setNum(event.currentTarget.value)}
-        onKeyUp={(event) => event.key === 'Enter' && setSearch(num)}
+        onKeyUp={(event) => event.key === 'Enter' && applySearch(num)}
       ></input>
       <div
         onClick={() => {
           setNum('');
-          setSearch('');
+          applySearch('');
         }}
       >
         X
