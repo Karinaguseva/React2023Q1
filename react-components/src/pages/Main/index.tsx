@@ -12,9 +12,9 @@ const Main = () => {
     };
   }, [searchRef]);
 
-  const changeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.currentTarget.value);
-    searchRef.current = event.target.value;
+  const changeSearch = (search: string) => {
+    setSearch(search);
+    searchRef.current = search;
   };
 
   return (

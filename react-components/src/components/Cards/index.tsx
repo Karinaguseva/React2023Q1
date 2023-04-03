@@ -1,34 +1,75 @@
 import React, { useEffect, useState } from 'react';
-import { Card as ICard } from 'types/card';
 import Card from './Card';
 import './index.scss';
+import { ApiCard } from '../../types/api';
+import Pagination from '../Pagination';
+// import { useSearchParams } from 'react-router-dom';
 
 interface CardsProps {
   search: string;
 }
 
 const Cards = ({ search }: CardsProps) => {
-  const [cards, setCards] = useState<ICard[]>([]);
-  const data = import('./../../data/data.json');
+  const [cardsAll, setCardsAll] = useState<ApiCard[]>([]);
+  const [load, setLoad] = useState(false);
+  // const [searchParamss, setSearchParamss] = useSearchParams();
+
+  // const pageParams = Number(searchParamss.get('page'));
+  // const nameParams = searchParamss.get('name');
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  // const url = new URL(window.location.href);
+  // url.searchParams.set('name', search);
+  // url.searchParams.set('page', currentPage.toString());
+  // // setSearchParamss(url.searchParams);
+  // console.log(searchParamss);
 
   useEffect(() => {
-    async function fetchData() {
-      setCards((await data).default);
-    }
-    fetchData();
-  }, [data]);
+    fetch(
+      `https://my-json-server.typicode.com/karinaguseva/api-for-react2023Q1/cards/?name_like=${search}&_page=${currentPage}&_limit=2`
+    )
+      .then((res) => {
+        if (res.ok) {
+          const totalApiPages = Number(res.headers.get('X-Total-Count'));
+          setTotalPages(Math.ceil(totalApiPages / 2));
+          setLoad(true);
+          return res.json();
+        }
+        throw new Error('Invalid Search');
+      })
+      .then((data) => {
+        if (data.length === 0) setCurrentPage(1);
+        setTimeout(() => {
+          setLoad(false);
+          setCardsAll(data);
+        }, 500);
+      });
+  }, [currentPage, search]);
 
   const filterCards = () => {
-    const filteredCards = cards.filter((card) => {
+    const filteredCards = cardsAll.filter((card) => {
       let render = false;
       if (card.name.toLowerCase().includes(search.toLowerCase())) render = true;
-      if (card.ingredient.toLowerCase().includes(search.toLowerCase())) render = true;
       return render;
     });
     return filteredCards;
   };
 
-  const totalCards = search ? filterCards() : cards;
+  const handlePageChange = ({ selected }: { selected: number }) => {
+    const page = selected + 1;
+    setCurrentPage(page);
+  };
+
+  // if (load) {
+  //   return (
+  //     <div className="cards__error">
+  //       <span className="loader"></span>
+  //     </div>
+  //   );
+  // }
+  const totalCards = search ? filterCards() : cardsAll;
   if (totalCards.length === 0) {
     return (
       <div className="cards__error">
@@ -37,11 +78,29 @@ const Cards = ({ search }: CardsProps) => {
     );
   }
   return (
-    <div className="cards">
-      {totalCards.map((card) => {
-        return <Card data={card} key={card.id} />;
-      })}
-    </div>
+    <>
+      <Pagination
+        pageCount={totalPages}
+        initialPage={currentPage - 1}
+        onChange={handlePageChange}
+      />
+      {load && (
+        <div className="cards__error">
+          <span className="loader"></span>
+        </div>
+      )}
+      {!load && (
+        <div className="cards">
+          {totalCards.map((card) => {
+            return (
+              <div key={card.id}>
+                <Card data={card} key={card.id} />
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </>
   );
 };
 

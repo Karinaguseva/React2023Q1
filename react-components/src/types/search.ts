@@ -1,1 +1,1 @@
-export type SetSearch = (event: React.ChangeEvent<HTMLInputElement>) => void;
+export type SetSearch = (search: string) => void;

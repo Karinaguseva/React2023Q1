@@ -1,0 +1,65 @@
+.pagination {
+  max-width: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  background-color: bisque;
+  border: 1px solid rgb(243, 185, 115);
+  border-radius: 10px;
+  &__page {
+    display: inline-flex;
+    // background-color: bisque;
+    border-top: 5px solid rgba(91, 135, 178);
+  }
+  &__page-link {
+    text-align: center;
+    min-width: 36px;
+    padding: calc(0.313vw + 4px);
+    cursor: pointer;
+  }
+
+  &__break {
+    display: inline-flex;
+    // background-color: bisque;
+    // border: 1px solid rgb(243, 185, 115);
+  }
+  &__break-link {
+    text-align: center;
+    min-width: 36px;
+    padding: calc(0.313vw + 4px);
+    cursor: pointer;
+  }
+
+  &__active {
+    border-top: 5px solid rgba(124, 189, 255);
+    // background-color: rgba(124, 189, 255);
+    // border: 1px solid rgba(23, 31, 39);
+  }
+
+  &__next-link,
+  &__prev-link {
+    display: inline-flex;
+  }
+
+  &__next-link {
+    background-image: url(./chevron-right.svg);
+  }
+  &__prev-link {
+    background-image: url(./chevron-left.svg);
+  }
+  &__next-link,
+  &__prev-link {
+    min-width: 36px;
+    min-height: 39px;
+
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+    background-position: center;
+    padding: calc(0.313vw + 4px);
+    cursor: pointer;
+  }
+}
