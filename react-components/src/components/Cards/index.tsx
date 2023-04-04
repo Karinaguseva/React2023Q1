@@ -1,10 +1,10 @@
 import React from 'react';
 import Card from './Card';
 import './index.scss';
-import { ApiCard } from '../../types/api';
+import { Card as ICard } from '../../types/card';
 
 interface CardProps {
-  data: ApiCard[];
+  data: ICard[];
 }
 const Cards = ({ data }: CardProps) => {
   if (!data.length)

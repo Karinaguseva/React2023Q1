@@ -16,9 +16,7 @@ const Pagination = ({ pageCount, initialPage, onChange }: PaginationProps) => {
         key={i}
         onClick={() => onChange(i - 1)}
         className={
-          i - 1 === initialPage
-            ? 'pagination__page-link pagination__active'
-            : 'pagination__page-link'
+          i - 1 === initialPage ? 'pagination__page pagination__active' : 'pagination__page'
         }
       >
         {i}
@@ -26,26 +24,7 @@ const Pagination = ({ pageCount, initialPage, onChange }: PaginationProps) => {
     );
   }
 
-  return (
-    <div className="pagination">{pages}</div>
-    // <ReactPaginate
-    //   nextLabel=" "
-    //   previousLabel=" "
-    //   pageCount={pageCount}
-    //   initialPage={initialPage}
-    //   onPageChange={onChange}
-    //   containerClassName="pagination"
-    //   activeClassName="pagination__active"
-    //   pageLinkClassName="pagination__page-link"
-    //   breakLinkClassName="pagination__break-link"
-    //   nextLinkClassName="pagination__next-link"
-    //   previousLinkClassName="pagination__prev-link"
-    //   pageClassName="pagination__page"
-    //   breakClassName="pagination__break"
-    //   nextClassName="pagination__next"
-    //   previousClassName="pagination__prev"
-    // />
-  );
+  return <div className="pagination">{pages}</div>;
 };
 
 export default Pagination;

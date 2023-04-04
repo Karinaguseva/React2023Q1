@@ -2,22 +2,24 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Search from 'components/Search';
 import Cards from '../../components/Cards';
 import Pagination from '../../components/Pagination';
-import { ApiCard } from '../../types/api';
+import { Card as ICard } from '../../types/card';
 import { useSearchParams } from 'react-router-dom';
+import ModalWindow from '../../components/Cards/ModalWindow/ModalWindow';
 
 const Main = () => {
-  const [cardsAll, setCardsAll] = useState<ApiCard[]>([]);
+  const [cards, setCards] = useState<ICard[]>([]);
+  const [card, setCard] = useState<ICard | null>(null);
   const [load, setLoad] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const limit = useRef(2);
-
   const pageParams = Number(searchParams.get('page') || 1);
   const nameParams = searchParams.get('name') || '';
+  const id = searchParams.get('id') || '';
 
   const [totalPages, setTotalPages] = useState(1);
 
   const filterCards = useCallback(
-    (data: ApiCard[]) => {
+    (data: ICard[]) => {
       const filteredCards = data.filter((card) => {
         let render = false;
         if (card.name.toLowerCase().includes(nameParams.toLowerCase())) render = true;
@@ -42,12 +44,29 @@ const Main = () => {
         throw new Error('Invalid Search');
       })
       .then((data) => {
-        setCardsAll(nameParams ? filterCards(data) : data);
+        setCards(nameParams ? filterCards(data) : data);
       })
       .finally(() => {
         setLoad(false);
       });
   }, [pageParams, nameParams, filterCards]);
+
+  useEffect(() => {
+    setLoad(true);
+    fetch(`https://my-json-server.typicode.com/karinaguseva/api-for-react2023Q1/cards/?id=${id}`)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error('Invalid Search');
+      })
+      .then((data) => {
+        setCard(data[0]);
+      })
+      .finally(() => {
+        setLoad(false);
+      });
+  }, [id]);
 
   const handlePageChange = (selected: number) => {
     const page = selected + 1;
@@ -55,6 +74,7 @@ const Main = () => {
     else searchParams.delete('page');
     setSearchParams(searchParams);
   };
+
   return (
     <main className="main">
       <Search />
@@ -69,7 +89,8 @@ const Main = () => {
             initialPage={pageParams - 1}
             onChange={handlePageChange}
           />
-          <Cards data={cardsAll} />
+          <Cards data={cards} />
+          {id && card && <ModalWindow data={card} />}
         </>
       )}
     </main>

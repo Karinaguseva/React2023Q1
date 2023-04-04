@@ -1,24 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './index.scss';
-import { ApiCard } from '../../../types/api';
-import ModalWindow from '../ModalWindow/ModalWindow';
+import { Card as ICard } from '../../../types/card';
+
+import { useSearchParams } from 'react-router-dom';
 
 interface CardProps {
-  data: ApiCard;
+  data: ICard;
 }
 
 const Card = ({ data }: CardProps) => {
-  const [showWindow, setShowWindow] = useState(false);
-  const showModalWindow = () => {
-    setShowWindow(true);
-  };
-  const notshowModalWindow = () => {
-    setShowWindow(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const showModalWindow = (id: string) => {
+    // searchParams.set('id', id);
+    // setSearchParams(searchParams);
+    if (searchParams.has('id')) searchParams.set('id', id);
+    else searchParams.append('id', id);
+
+    setSearchParams(searchParams);
   };
 
   return (
     <>
-      <div className="card" onClick={showModalWindow}>
+      <div
+        className="card"
+        onClick={() => {
+          showModalWindow(data.id.toString());
+        }}
+      >
         <div className="card__header">
           <img
             src={data.image}
@@ -44,12 +53,12 @@ const Card = ({ data }: CardProps) => {
           {/* <span className="card__span">Prerequisite:</span> {data.gender} */}
         </div>
       </div>
-      <ModalWindow
+      {/* <ModalWindow
         data={data}
         key={data.image}
         onClick={notshowModalWindow}
         showWindow={showWindow}
-      />
+      /> */}
     </>
   );
 };

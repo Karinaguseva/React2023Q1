@@ -6,7 +6,7 @@ const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const nameParams = searchParams.get('name') || '';
 
-  const [num, setNum] = useState(nameParams);
+  const [value, setValue] = useState(nameParams);
   const applySearch = (name: string) => {
     if (name) searchParams.set('name', name);
     else searchParams.delete('name');
@@ -20,13 +20,13 @@ const Search = () => {
         className="search__input"
         placeholder="Find beast..."
         type="text"
-        value={num}
-        onChange={(event) => setNum(event.currentTarget.value)}
-        onKeyUp={(event) => event.key === 'Enter' && applySearch(num)}
+        value={value}
+        onChange={(event) => setValue(event.currentTarget.value)}
+        onKeyUp={(event) => event.key === 'Enter' && applySearch(value)}
       ></input>
       <div
         onClick={() => {
-          setNum('');
+          setValue('');
           applySearch('');
         }}
       >
