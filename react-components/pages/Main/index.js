@@ -14,8 +14,9 @@ const Main = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const limit = useRef(2);
     const pageParams = Number(searchParams.get('page') || 1);
-    const local = localStorage.getItem('search.karinaguseva') || '';
+    const nameParams = searchParams.get('name') || '';
     const id = searchParams.get('id') || '';
+    const local = localStorage.getItem('search.karinaguseva') || nameParams;
     const filterCards = useCallback((data) => {
         const filteredCards = data.filter((card) => {
             let render = false;
