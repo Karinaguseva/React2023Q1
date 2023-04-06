@@ -9,7 +9,7 @@ import './styles/style.css';
 import ROUTES from 'types/routes';
 import Forms from './pages/Forms/index';
 const router = createHashRouter(createRoutesFromElements(React.createElement(Route, { path: ROUTES.MAIN, element: React.createElement(Root, null) },
-    React.createElement(Route, { path: ROUTES.MAIN, element: React.createElement(Main, null) }),
+    React.createElement(Route, { index: true, element: React.createElement(Main, null) }),
     React.createElement(Route, { path: ROUTES.ABOUT, element: React.createElement(About, null) }),
     React.createElement(Route, { path: ROUTES.FORMS, element: React.createElement(Forms, null) }),
     React.createElement(Route, { path: "*", element: React.createElement(NotFound404, null) }))));

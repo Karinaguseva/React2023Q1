@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.scss';
 import { useSearchParams } from 'react-router-dom';
 const Search = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const nameParams = searchParams.get('name') || '';
-    const [value, setValue] = useState(nameParams);
-    const applySearch = (name) => {
-        if (name)
-            searchParams.set('name', name);
+    const nameParams = localStorage.getItem('search.karinaguseva') || '';
+    useEffect(() => {
+        if (!searchParams.get('name') && nameParams !== '') {
+            searchParams.set('name', nameParams);
+            setSearchParams(searchParams);
+        }
         else
             searchParams.delete('name');
+    }, [nameParams, setSearchParams, searchParams]);
+    const [value, setValue] = useState(nameParams);
+    const applySearch = (name) => {
+        if (name) {
+            searchParams.set('name', name);
+            localStorage.setItem('search.karinaguseva', name);
+        }
+        else {
+            searchParams.delete('name');
+            localStorage.removeItem('search.karinaguseva');
+        }
         searchParams.delete('page');
         setSearchParams(searchParams);
     };
