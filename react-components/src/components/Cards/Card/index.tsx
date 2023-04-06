@@ -14,10 +14,6 @@ const Card = ({ data }: CardProps) => {
   const showModalWindow = (id: string) => {
     searchParams.set('id', id);
     setSearchParams(searchParams);
-    // if (searchParams.has('id')) searchParams.set('id', id);
-    // else searchParams.append('id', id);
-
-    // setSearchParams(searchParams);
   };
 
   return (
