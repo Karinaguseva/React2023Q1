@@ -4,16 +4,16 @@ import { useSearchParams } from 'react-router-dom';
 const Search = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const nameParams = searchParams.get('name') || '';
-    const nameLocal = localStorage.getItem('search.karinaguseva') || nameParams;
-    const [value, setValue] = useState(nameLocal);
+    const nameLocal = localStorage.getItem('search.karinaguseva');
+    const [value, setValue] = useState(nameParams);
     useEffect(() => {
-        if (!nameParams && nameLocal !== '') {
+        if (!nameParams && nameLocal) {
             searchParams.set('name', nameLocal);
             setSearchParams(searchParams);
+            setValue(nameLocal);
         }
-        else
-            searchParams.delete('name');
-    }, [nameParams, nameLocal, setSearchParams, searchParams]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     const applySearch = (name) => {
         if (name) {
             searchParams.set('name', name);
@@ -32,6 +32,6 @@ const Search = () => {
             React.createElement("div", { className: "search__delete", onClick: () => {
                     setValue('');
                     applySearch('');
-                } }))));
+                } }, "Delete"))));
 };
 export default Search;
