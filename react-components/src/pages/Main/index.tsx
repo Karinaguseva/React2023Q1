@@ -16,25 +16,25 @@ const Main = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const limit = useRef(2);
   const pageParams = Number(searchParams.get('page') || 1);
-  const nameParams = searchParams.get('name') || '';
+  const local = localStorage.getItem('search.karinaguseva') || '';
   const id = searchParams.get('id') || '';
 
   const filterCards = useCallback(
     (data: ICard[]) => {
       const filteredCards = data.filter((card) => {
         let render = false;
-        if (card.name.toLowerCase().includes(nameParams.toLowerCase())) render = true;
+        if (card.name.toLowerCase().includes(local.toLowerCase())) render = true;
         return render;
       });
       return filteredCards;
     },
-    [nameParams]
+    [local]
   );
 
   useEffect(() => {
     setLoad(true);
     fetch(
-      `https://my-json-server.typicode.com/karinaguseva/api-for-react2023Q1/cards/?name_like=${nameParams}&_page=${pageParams}&_limit=${limit.current}`
+      `https://my-json-server.typicode.com/karinaguseva/api-for-react2023Q1/cards/?name_like=${local}&_page=${pageParams}&_limit=${limit.current}`
     )
       .then((res) => {
         if (res.ok) {
@@ -45,12 +45,12 @@ const Main = () => {
         throw new Error('Invalid Search');
       })
       .then((data) => {
-        setCards(nameParams ? filterCards(data) : data);
+        setCards(local ? filterCards(data) : data);
       })
       .finally(() => {
         setLoad(false);
       });
-  }, [pageParams, nameParams, filterCards]);
+  }, [pageParams, local, filterCards]);
 
   useEffect(() => {
     setLoadCard(true);

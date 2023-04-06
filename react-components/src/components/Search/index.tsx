@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.scss';
 import { useSearchParams } from 'react-router-dom';
 
 const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const nameParams = searchParams.get('name') || '';
+  const nameParams = localStorage.getItem('search.karinaguseva') || '';
+
+  useEffect(() => {
+    if (!searchParams.get('name') && nameParams !== '') {
+      searchParams.set('name', nameParams);
+      setSearchParams(searchParams);
+    } else searchParams.delete('name');
+  }, [nameParams, setSearchParams, searchParams]);
 
   const [value, setValue] = useState(nameParams);
   const applySearch = (name: string) => {
-    if (name) searchParams.set('name', name);
-    else searchParams.delete('name');
+    if (name) {
+      searchParams.set('name', name);
+      localStorage.setItem('search.karinaguseva', name);
+    } else {
+      searchParams.delete('name');
+      localStorage.removeItem('search.karinaguseva');
+    }
     searchParams.delete('page');
     setSearchParams(searchParams);
   };
@@ -17,6 +29,7 @@ const Search = () => {
   return (
     <div className="search">
       <div className="search__wrapper">
+        {/* <form className="search__wrapper"> */}
         <input
           className="search__input"
           placeholder="Find beast..."
@@ -32,6 +45,7 @@ const Search = () => {
             applySearch('');
           }}
         ></div>
+        {/* </form> */}
       </div>
     </div>
   );

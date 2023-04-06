@@ -18,7 +18,7 @@ import Forms from './pages/Forms/index';
 const router = createHashRouter(
   createRoutesFromElements(
     <Route path={ROUTES.MAIN} element={<Root />}>
-      <Route path={ROUTES.MAIN} element={<Main />}></Route>
+      <Route index element={<Main />}></Route>
       <Route path={ROUTES.ABOUT} element={<About />}></Route>
       <Route path={ROUTES.FORMS} element={<Forms />}></Route>
       <Route path="*" element={<NotFound404 />}></Route>
