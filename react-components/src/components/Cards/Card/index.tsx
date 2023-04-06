@@ -1,11 +1,11 @@
 import React from 'react';
 import './index.scss';
-import { Card as ICard } from '../../../types/card';
+import { CardPreview } from '../../../types/card';
 
 import { useSearchParams } from 'react-router-dom';
 
 interface CardProps {
-  data: ICard;
+  data: CardPreview;
 }
 
 const Card = ({ data }: CardProps) => {

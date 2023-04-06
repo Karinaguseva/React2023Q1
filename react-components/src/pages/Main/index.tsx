@@ -4,7 +4,7 @@ import Cards from '../../components/Cards';
 import Pagination from '../../components/Pagination';
 import { Card as ICard } from '../../types/card';
 import { useSearchParams } from 'react-router-dom';
-import ModalWindow from '../../components/Cards/ModalWindow/ModalWindow';
+import ModalWindow from '../../components/Cards/ModalWindow';
 import Loader from '../../components/Loader';
 
 const Main = () => {
@@ -18,7 +18,7 @@ const Main = () => {
   const pageParams = Number(searchParams.get('page') || 1);
   const nameParams = searchParams.get('name') || '';
   const id = searchParams.get('id') || '';
-  const local = localStorage.getItem('search.karinaguseva') || nameParams;
+  const local = localStorage.getItem('search.karinaguseva') || '';
 
   const filterCards = useCallback(
     (data: ICard[]) => {
@@ -35,32 +35,26 @@ const Main = () => {
   useEffect(() => {
     setLoad(true);
     fetch(
-      `https://my-json-server.typicode.com/karinaguseva/api-for-react2023Q1/cards/?name_like=${local}&_page=${pageParams}&_limit=${limit.current}`
+      `https://my-json-server.typicode.com/karinaguseva/api-for-react2023Q1/cards/?name_like=${nameParams}&_page=${pageParams}&_limit=${limit.current}`
     )
       .then((res) => {
-        if (res.ok) {
-          const totalApiPages = Number(res.headers.get('X-Total-Count'));
-          setTotalPages(Math.ceil(totalApiPages / limit.current));
-          return res.json();
-        }
-        throw new Error('Invalid Search');
+        const totalApiPages = Number(res?.headers?.get('X-Total-Count') || 1);
+        setTotalPages(Math.ceil(totalApiPages / limit.current));
+        return res.json();
       })
       .then((data) => {
-        setCards(local ? filterCards(data) : data);
+        setCards(nameParams ? filterCards(data) : data);
       })
       .finally(() => {
         setLoad(false);
       });
-  }, [pageParams, local, filterCards]);
+  }, [pageParams, nameParams, filterCards]);
 
   useEffect(() => {
     setLoadCard(true);
     fetch(`https://my-json-server.typicode.com/karinaguseva/api-for-react2023Q1/cards/?id=${id}`)
       .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        throw new Error('Invalid Search');
+        return res.json();
       })
       .then((data) => {
         setCard(data[0]);
