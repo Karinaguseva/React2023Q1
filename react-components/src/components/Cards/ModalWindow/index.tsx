@@ -19,7 +19,7 @@ const ModalWindow = ({ data, loading }: ModalWindowProps) => {
 
   return (
     <>
-      <div className={'modal'}>
+      <div onClick={(e) => e.currentTarget === e.target && close()} className={'modal'}>
         <div className={'modal__wrapper'}>
           {loading ? (
             <Loader />
