@@ -10,7 +10,6 @@
   background-color: bisque;
   border-radius: 10px;
 
-
   &__page {
     text-align: center;
     vertical-align: bottom;
@@ -29,8 +28,13 @@
 }
 
 @media screen and (max-width: 48rem) {
-  .pagination__active {
-    color: rgba(124, 189, 255);
-    border: none;
+  .pagination {
+    &__active {
+      color: rgba(124, 189, 255);
+      border: none;
+    }
+    &__page {
+      border: none;
+    }
   }
 }

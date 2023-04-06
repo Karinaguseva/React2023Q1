@@ -16,21 +16,22 @@ const Search = () => {
 
   return (
     <div className="search">
-      <input
-        className="search__input"
-        placeholder="Find beast..."
-        type="text"
-        value={value}
-        onChange={(event) => setValue(event.currentTarget.value)}
-        onKeyUp={(event) => event.key === 'Enter' && applySearch(value)}
-      ></input>
-      <div
-        onClick={() => {
-          setValue('');
-          applySearch('');
-        }}
-      >
-        X
+      <div className="search__wrapper">
+        <input
+          className="search__input"
+          placeholder="Find beast..."
+          type="text"
+          value={value}
+          onChange={(event) => setValue(event.currentTarget.value)}
+          onKeyUp={(event) => event.key === 'Enter' && applySearch(value)}
+        ></input>
+        <div
+          className="search__delete"
+          onClick={() => {
+            setValue('');
+            applySearch('');
+          }}
+        ></div>
       </div>
     </div>
   );
