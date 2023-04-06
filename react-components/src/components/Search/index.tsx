@@ -4,16 +4,17 @@ import { useSearchParams } from 'react-router-dom';
 
 const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const nameParams = localStorage.getItem('search.karinaguseva') || '';
+  const nameParams = searchParams.get('name') || '';
+  const nameLocal = localStorage.getItem('search.karinaguseva') || '';
+  const [value, setValue] = useState(nameParams);
 
   useEffect(() => {
-    if (!searchParams.get('name') && nameParams !== '') {
-      searchParams.set('name', nameParams);
+    if (!nameParams && nameLocal !== '') {
+      searchParams.set('name', nameLocal);
       setSearchParams(searchParams);
     } else searchParams.delete('name');
-  }, [nameParams, setSearchParams, searchParams]);
+  }, [nameParams, nameLocal, setSearchParams, searchParams]);
 
-  const [value, setValue] = useState(nameParams);
   const applySearch = (name: string) => {
     if (name) {
       searchParams.set('name', name);
