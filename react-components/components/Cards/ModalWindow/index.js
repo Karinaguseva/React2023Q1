@@ -9,7 +9,7 @@ const ModalWindow = ({ data, loading }) => {
         setSearchParams(searchParams);
     };
     return (React.createElement(React.Fragment, null,
-        React.createElement("div", { className: 'modal' },
+        React.createElement("div", { onClick: (e) => e.currentTarget === e.target && close(), className: 'modal' },
             React.createElement("div", { className: 'modal__wrapper' }, loading ? (React.createElement(Loader, null)) : (React.createElement(React.Fragment, null,
                 React.createElement("div", { onClick: close, className: "modal__close" }),
                 React.createElement("div", { className: "modal__card card" },
