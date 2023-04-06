@@ -9,16 +9,6 @@ const Select = ({ register, name, label, errors }) => {
             React.createElement("option", null, "Gryffindor"),
             React.createElement("option", null, "Ravenclaw"),
             React.createElement("option", null, "Hufflepuff"),
-            React.createElement("option", null, "Slytherin")))
-    // <div className="input__wrapper">
-    //   <div className="input__label-wrapper">
-    //     <label className="forms__label" htmlFor={name}>
-    //       {label}
-    //     </label>
-    //     {errors && <div className="input__error">{errors}</div>}
-    //   </div>
-    //   <input {...register} type="date" className={`forms__input ${name}`} id={name}></input>
-    // </div>
-    );
+            React.createElement("option", null, "Slytherin"))));
 };
 export default Select;

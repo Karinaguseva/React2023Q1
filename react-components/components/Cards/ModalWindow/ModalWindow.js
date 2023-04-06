@@ -1,0 +1,38 @@
+import React from 'react';
+import { useSearchParams } from 'react-router-dom';
+import './index.scss';
+import Loader from '../../Loader';
+const ModalWindow = ({ data, loading }) => {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const close = () => {
+        searchParams.delete('id');
+        setSearchParams(searchParams);
+    };
+    return (React.createElement(React.Fragment, null,
+        React.createElement("div", { className: 'modal' },
+            React.createElement("div", { className: 'modal__wrapper' }, loading ? (React.createElement(Loader, null)) : (React.createElement(React.Fragment, null,
+                React.createElement("div", { onClick: close, className: "modal__close" }),
+                React.createElement("div", { className: "modal__card card" },
+                    React.createElement("div", { className: "card__header" },
+                        React.createElement("img", { src: data?.image, alt: data?.name, className: "card__img", width: '180px', height: '180px' }),
+                        React.createElement("div", null,
+                            React.createElement("div", { className: "card__title" }, data?.name),
+                            React.createElement("div", { className: "card__description" },
+                                React.createElement("span", { className: "card__span" }, "Description:"),
+                                " ",
+                                data?.description))),
+                    React.createElement("div", { className: "card__ingredient" },
+                        React.createElement("span", { className: "card__span" }, "Ingredient:"),
+                        " ",
+                        data?.ingredient),
+                    React.createElement("div", { className: "card__cost" },
+                        React.createElement("span", { className: "card__span" }, "Ingredient cost:"),
+                        " ",
+                        data?.cost,
+                        " galleons"),
+                    React.createElement("div", { className: "card__prerequisite" },
+                        React.createElement("span", { className: "card__span" }, "Prerequisite:"),
+                        " ",
+                        data?.prerequisite))))))));
+};
+export default ModalWindow;
