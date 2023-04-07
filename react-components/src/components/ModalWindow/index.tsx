@@ -1,8 +1,8 @@
 import React from 'react';
-import { Card as ICard } from '../../../types/card';
+import { Card as ICard } from '../../types/card';
 import { useSearchParams } from 'react-router-dom';
 import './index.scss';
-import Loader from '../../Loader';
+import Loader from '../Loader';
 
 interface ModalWindowProps {
   data: ICard | null;
