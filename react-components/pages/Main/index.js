@@ -3,7 +3,7 @@ import Search from 'components/Search';
 import Cards from '../../components/Cards';
 import Pagination from '../../components/Pagination';
 import { useSearchParams } from 'react-router-dom';
-import ModalWindow from '../../components/Cards/ModalWindow';
+import ModalWindow from '../../components/ModalWindow';
 import Loader from '../../components/Loader';
 const Main = () => {
     const [cards, setCards] = useState([]);

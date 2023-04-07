@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import './index.scss';
-import Loader from '../../Loader';
+import Loader from '../Loader';
 const ModalWindow = ({ data, loading }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const close = () => {
