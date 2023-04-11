@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, render } from '@testing-library/react';
+import { screen, render, waitFor } from '@testing-library/react';
 import { App } from './App';
 import userEvent from '@testing-library/user-event';
 
@@ -11,7 +11,10 @@ describe('App', () => {
     const link = screen.getByText('Forms');
     const user = userEvent.setup();
     await user.click(link);
-    const forms = screen.getByText(/Forms page/i);
-    expect(forms).toBeInTheDocument();
+
+    waitFor(async () => {
+      const forms = await screen.findByText(/Forms page/i);
+      expect(forms).toBeInTheDocument();
+    });
   });
 });

@@ -1,45 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { Card as ICard } from 'types/card';
+import React from 'react';
 import Card from './Card';
 import './index.scss';
+import { Card as ICard } from '../../types/card';
 
-interface CardsProps {
-  search: string;
+interface CardProps {
+  data: ICard[];
 }
-
-const Cards = ({ search }: CardsProps) => {
-  const [cards, setCards] = useState<ICard[]>([]);
-  const data = import('./../../data/data.json');
-
-  useEffect(() => {
-    async function fetchData() {
-      setCards((await data).default);
-    }
-    fetchData();
-  }, [data]);
-
-  const filterCards = () => {
-    const filteredCards = cards.filter((card) => {
-      let render = false;
-      if (card.name.toLowerCase().includes(search.toLowerCase())) render = true;
-      if (card.ingredient.toLowerCase().includes(search.toLowerCase())) render = true;
-      return render;
-    });
-    return filteredCards;
-  };
-
-  const totalCards = search ? filterCards() : cards;
-  if (totalCards.length === 0) {
+const Cards = ({ data }: CardProps) => {
+  if (!data.length)
     return (
       <div className="cards__error">
         <p className="error__text">No such cards</p>
       </div>
     );
-  }
   return (
     <div className="cards">
-      {totalCards.map((card) => {
-        return <Card data={card} key={card.id} />;
+      {data.map((card) => {
+        return (
+          <div key={card.id}>
+            <Card data={card} key={card.id} />
+          </div>
+        );
       })}
     </div>
   );

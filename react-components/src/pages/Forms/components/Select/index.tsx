@@ -25,15 +25,6 @@ const Select = ({ register, name, label, errors }: SelectProps) => {
         <option>Slytherin</option>
       </select>
     </div>
-    // <div className="input__wrapper">
-    //   <div className="input__label-wrapper">
-    //     <label className="forms__label" htmlFor={name}>
-    //       {label}
-    //     </label>
-    //     {errors && <div className="input__error">{errors}</div>}
-    //   </div>
-    //   <input {...register} type="date" className={`forms__input ${name}`} id={name}></input>
-    // </div>
   );
 };
 
