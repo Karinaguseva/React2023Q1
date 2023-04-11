@@ -1,21 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './index.scss';
 import { useSearchParams } from 'react-router-dom';
 
 const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const nameParams = searchParams.get('name') || '';
-  const nameLocal = localStorage.getItem('search.karinaguseva');
-  const [value, setValue] = useState(nameParams);
-
-  useEffect(() => {
-    if (!nameParams && nameLocal) {
-      searchParams.set('name', nameLocal);
-      setSearchParams(searchParams);
-      setValue(nameLocal);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const nameLocal = localStorage.getItem('search.karinaguseva') || '';
+  const [value, setValue] = useState(nameLocal);
 
   const applySearch = (name: string) => {
     if (name) {

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Search from 'components/Search';
 import Cards from '../../components/Cards';
 import Pagination from '../../components/Pagination';
@@ -20,22 +20,18 @@ const Main = () => {
   const id = searchParams.get('id') || '';
   const local = localStorage.getItem('search.karinaguseva') || '';
 
-  const filterCards = useCallback(
-    (data: ICard[]) => {
-      const filteredCards = data.filter((card) => {
-        let render = false;
-        if (card.name.toLowerCase().includes(local.toLowerCase())) render = true;
-        return render;
-      });
-      return filteredCards;
-    },
-    [local]
-  );
+  useEffect(() => {
+    if (!nameParams && local) {
+      searchParams.set('name', local);
+      setSearchParams(searchParams);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     setLoad(true);
     fetch(
-      `https://my-json-server.typicode.com/karinaguseva/api-for-react2023Q1/cards/?name_like=${nameParams}&_page=${pageParams}&_limit=${limit.current}`
+      `https://my-json-server.typicode.com/karinaguseva/api-for-react2023Q1/cards/?name_like=${local}&_page=${pageParams}&_limit=${limit.current}`
     )
       .then((res) => {
         const totalApiPages = Number(res?.headers?.get('X-Total-Count') || 1);
@@ -43,25 +39,27 @@ const Main = () => {
         return res.json();
       })
       .then((data) => {
-        setCards(nameParams ? filterCards(data) : data);
+        setCards(data);
       })
       .finally(() => {
         setLoad(false);
       });
-  }, [pageParams, nameParams, filterCards]);
+  }, [pageParams, local]);
 
   useEffect(() => {
     setLoadCard(true);
-    fetch(`https://my-json-server.typicode.com/karinaguseva/api-for-react2023Q1/cards/?id=${id}`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setCard(data[0]);
-      })
-      .finally(() => {
-        setLoadCard(false);
-      });
+    if (id) {
+      fetch(`https://my-json-server.typicode.com/karinaguseva/api-for-react2023Q1/cards/?id=${id}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          setCard(data[0]);
+        })
+        .finally(() => {
+          setLoadCard(false);
+        });
+    }
   }, [id]);
 
   const handlePageChange = (selected: number) => {
