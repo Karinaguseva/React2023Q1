@@ -1,5 +1,5 @@
 import React from 'react';
-import { BeastCard } from '../../../../types/beastCard';
+import { BeastCard, BeastCardForm } from '../../../../types/beastCard';
 import './index.scss';
 
 interface CardFormProps {
@@ -21,7 +21,7 @@ const CardForm = ({ cards }: CardFormProps) => {
         return (
           <div className="form-card" key={card.id}>
             <div className="form-card__img">
-              <img src={card.image} alt={card.name} className="form-card__img"></img>
+              <img src={card.image.toString()} alt={card.name} className="form-card__img"></img>
             </div>
             <div className="form-card__title">{card.name}</div>
             <div className="form-card__birth birth">

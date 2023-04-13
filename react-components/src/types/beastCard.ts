@@ -1,5 +1,7 @@
 export type BeastCardForm = {
+  id: number;
   image: FileList;
+  // image: string;
   name: string;
   date: string;
   description: string;
@@ -9,4 +11,10 @@ export type BeastCardForm = {
   checkbox: boolean;
 };
 
-export type BeastCard = Omit<BeastCardForm, 'image' | 'checkbox'> & { image: string; id: number };
+export type BeastCard = Omit<BeastCardForm, 'image' | 'checkbox'> & {
+  image: string;
+};
+
+export interface CardsProps {
+  cards: BeastCardForm[];
+}

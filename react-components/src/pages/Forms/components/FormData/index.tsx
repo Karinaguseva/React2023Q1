@@ -27,8 +27,8 @@ const FormData = ({ handleCard, cards }: FormDataProps) => {
 
   const onSubmit: SubmitHandler<BeastCardForm> = (data) => {
     handleCard({
-      id: cards,
       ...data,
+      id: cards,
       image: URL.createObjectURL(data.image[0]),
     });
     reset();

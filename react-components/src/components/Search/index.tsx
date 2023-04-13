@@ -1,22 +1,30 @@
 import React, { useState } from 'react';
 import './index.scss';
 import { useSearchParams } from 'react-router-dom';
+import { useSearch } from '../../hooks/useSearch';
+import { useActions } from '../../hooks/useAction';
 
 const Search = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const nameLocal = localStorage.getItem('search.karinaguseva') || '';
-  const [value, setValue] = useState(nameLocal);
+  const { changeSearch } = useActions();
+  const search = useSearch();
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [value, setValue] = useState(search);
+
+  // if (search) {
+  //   searchParams.set('name', search);
+  // } else {
+  //   searchParams.delete('name');
+  // }
   const applySearch = (name: string) => {
     if (name) {
       searchParams.set('name', name);
-      localStorage.setItem('search.karinaguseva', name);
     } else {
       searchParams.delete('name');
-      localStorage.removeItem('search.karinaguseva');
     }
-    searchParams.delete('page');
+    // searchParams.delete('page');
     setSearchParams(searchParams);
+    changeSearch(name);
   };
 
   return (
