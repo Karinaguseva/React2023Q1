@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { BeastCard, CardsProps } from '../../types/beastCard';
+import { BeastCard } from '../../types/beastCard';
 
 const initialState: BeastCard[] = [];
 
