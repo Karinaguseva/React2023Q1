@@ -2,15 +2,23 @@ import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import './index.scss';
 import Loader from '../Loader';
-const ModalWindow = ({ data, loading }) => {
+import { useActions } from '../../hooks/useAction';
+const ModalWindow = ({ modalData, loading }) => {
     const [searchParams, setSearchParams] = useSearchParams();
+    const { changeCardId } = useActions();
     const close = () => {
         searchParams.delete('id');
         setSearchParams(searchParams);
+        changeCardId(null);
     };
-    return (React.createElement(React.Fragment, null,
-        React.createElement("div", { onClick: (e) => e.currentTarget === e.target && close(), className: 'modal' },
-            React.createElement("div", { className: 'modal__wrapper' }, loading ? (React.createElement(Loader, null)) : (React.createElement(React.Fragment, null,
+    if (loading)
+        return (React.createElement("div", { onClick: (e) => e.currentTarget === e.target && close(), className: 'modal' },
+            React.createElement("div", { className: 'modal__wrapper' },
+                React.createElement(Loader, null))));
+    else if (modalData) {
+        const data = modalData[0];
+        return (React.createElement("div", { onClick: (e) => e.currentTarget === e.target && close(), className: 'modal' },
+            React.createElement("div", { className: 'modal__wrapper' },
                 React.createElement("div", { onClick: close, className: "modal__close" }),
                 React.createElement("div", { className: "modal__card card" },
                     React.createElement("div", { className: "card__header" },
@@ -33,6 +41,8 @@ const ModalWindow = ({ data, loading }) => {
                     React.createElement("div", { className: "card__prerequisite" },
                         React.createElement("span", { className: "card__span" }, "Prerequisite:"),
                         " ",
-                        data?.prerequisite))))))));
+                        data?.prerequisite)))));
+    }
+    return React.createElement(React.Fragment, null);
 };
 export default ModalWindow;

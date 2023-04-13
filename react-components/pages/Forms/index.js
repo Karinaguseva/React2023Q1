@@ -3,11 +3,14 @@ import './index.scss';
 import FormData from './components/FormData/index';
 import CardForm from './components/CardForm';
 import Popup from './../../components/Popup/index';
+import { useActions } from '../../hooks/useAction';
+import { useFormCards } from '../../hooks/useFormCards';
 const Forms = () => {
-    const [cards, setCards] = useState([]);
     const [popup, setPopup] = useState(false);
+    const { addCard } = useActions();
+    const cards = useFormCards();
     const handleCard = (card) => {
-        setCards([...cards, card]);
+        addCard(card);
         setPopup(true);
     };
     useEffect(() => {
@@ -17,7 +20,7 @@ const Forms = () => {
             }, 3000);
     }, [popup]);
     return (React.createElement("div", { className: "main" },
-        React.createElement(FormData, { handleCard: handleCard, cards: cards.length }),
+        React.createElement(FormData, { handleCard: handleCard, cards: cards?.length }),
         React.createElement("div", { className: "forms__cards" },
             React.createElement(CardForm, { cards: cards })),
         React.createElement(Popup, { showPopup: popup })));

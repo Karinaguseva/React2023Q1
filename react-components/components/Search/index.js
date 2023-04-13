@@ -1,30 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './index.scss';
-import { useSearchParams } from 'react-router-dom';
+import { useSearch } from '../../hooks/useSearch';
+import { useActions } from '../../hooks/useAction';
 const Search = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const nameParams = searchParams.get('name') || '';
-    const nameLocal = localStorage.getItem('search.karinaguseva');
-    const [value, setValue] = useState(nameParams);
-    useEffect(() => {
-        if (!nameParams && nameLocal) {
-            searchParams.set('name', nameLocal);
-            setSearchParams(searchParams);
-            setValue(nameLocal);
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    const { changeSearch } = useActions();
+    const search = useSearch();
+    const [value, setValue] = useState(search);
     const applySearch = (name) => {
-        if (name) {
-            searchParams.set('name', name);
-            localStorage.setItem('search.karinaguseva', name);
-        }
-        else {
-            searchParams.delete('name');
-            localStorage.removeItem('search.karinaguseva');
-        }
-        searchParams.delete('page');
-        setSearchParams(searchParams);
+        changeSearch(name);
     };
     return (React.createElement("div", { className: "search" },
         React.createElement("div", { className: "search__wrapper" },

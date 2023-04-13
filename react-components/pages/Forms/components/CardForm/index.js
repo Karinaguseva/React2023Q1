@@ -9,7 +9,7 @@ const CardForm = ({ cards }) => {
         const cardBirth = card.date.replace(/^(\d+)-(\d+)-(\d+)$/, `$3.$2.$1`);
         return (React.createElement("div", { className: "form-card", key: card.id },
             React.createElement("div", { className: "form-card__img" },
-                React.createElement("img", { src: card.image, alt: card.name, className: "form-card__img" })),
+                React.createElement("img", { src: card.image.toString(), alt: card.name, className: "form-card__img" })),
             React.createElement("div", { className: "form-card__title" }, card.name),
             React.createElement("div", { className: "form-card__birth birth" },
                 React.createElement("p", { className: "birth__title" }, "Birth:"),

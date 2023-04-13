@@ -13,8 +13,8 @@ const FormData = ({ handleCard, cards }) => {
     const { register, handleSubmit, formState: { errors }, reset, } = useForm({ resolver, mode: 'onSubmit', reValidateMode: 'onSubmit' });
     const onSubmit = (data) => {
         handleCard({
-            id: cards,
             ...data,
+            id: cards,
             image: URL.createObjectURL(data.image[0]),
         });
         reset();

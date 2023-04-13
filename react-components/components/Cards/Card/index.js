@@ -1,11 +1,10 @@
 import React from 'react';
 import './index.scss';
-import { useSearchParams } from 'react-router-dom';
+import { useActions } from '../../../hooks/useAction';
 const Card = ({ data }) => {
-    const [searchParams, setSearchParams] = useSearchParams();
+    const { changeCardId } = useActions();
     const showModalWindow = (id) => {
-        searchParams.set('id', id);
-        setSearchParams(searchParams);
+        changeCardId(id);
     };
     return (React.createElement(React.Fragment, null,
         React.createElement("div", { className: "preview", onClick: () => {

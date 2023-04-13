@@ -8,6 +8,8 @@ import Root from './Root';
 import './styles/style.css';
 import ROUTES from 'types/routes';
 import Forms from './pages/Forms/index';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 const router = createHashRouter(createRoutesFromElements(React.createElement(Route, { path: ROUTES.MAIN, element: React.createElement(Root, null) },
     React.createElement(Route, { index: true, element: React.createElement(Main, null) }),
     React.createElement(Route, { path: ROUTES.ABOUT, element: React.createElement(About, null) }),
@@ -16,4 +18,5 @@ const router = createHashRouter(createRoutesFromElements(React.createElement(Rou
 const root = document.getElementById('root');
 export const App = () => React.createElement(RouterProvider, { router: router });
 if (root)
-    ReactDOM.createRoot(root).render(React.createElement(App, null));
+    ReactDOM.createRoot(root).render(React.createElement(Provider, { store: store },
+        React.createElement(App, null)));
