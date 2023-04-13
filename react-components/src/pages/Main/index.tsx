@@ -7,7 +7,7 @@ import { useGetCardsQuery } from '../../store/api/cards.api';
 
 import { useSearch } from '../../hooks/useSearch';
 import { useCardId } from '../../hooks/useCardId';
-import Modal from '../../components/ModalPopup';
+import ModalPopup from '../../components/ModalPopup';
 
 const Main = () => {
   const search = useSearch();
@@ -18,7 +18,7 @@ const Main = () => {
     <main className="main">
       <Search />
       {isLoading ? <Loader /> : <Cards data={cards} />}
-      {cardId && <Modal />}
+      {cardId && <ModalPopup />}
     </main>
   );
 };

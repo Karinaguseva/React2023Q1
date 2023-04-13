@@ -1,7 +1,6 @@
 export type BeastCardForm = {
   id: number;
   image: FileList;
-  // image: string;
   name: string;
   date: string;
   description: string;

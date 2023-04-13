@@ -1,5 +1,5 @@
 import React from 'react';
-import { BeastCard, BeastCardForm } from '../../../../types/beastCard';
+import { BeastCard } from '../../../../types/beastCard';
 import './index.scss';
 
 interface CardFormProps {
