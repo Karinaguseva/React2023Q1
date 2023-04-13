@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './index.scss';
-import { useSearch } from '../../hooks/useSearch';
-import { useActions } from '../../hooks/useAction';
+import { useSearch } from '../../../../hooks/useSearch';
+import { useActions } from '../../../../hooks/useAction';
 
 const Search = () => {
   const { changeSearch } = useActions();

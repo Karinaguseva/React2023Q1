@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
-import Main from '../../pages/Main';
+import Main from '../..';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 describe('Cards', () => {

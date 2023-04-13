@@ -1,7 +1,7 @@
 import React from 'react';
-import Card from './Card';
+import Card from '../Card';
 import './index.scss';
-import { Card as ICard } from '../../types/card';
+import { Card as ICard } from '../../../../types/card';
 
 interface CardProps {
   data: ICard[];
