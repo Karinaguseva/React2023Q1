@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.scss';
-import { useActions } from '../../../hooks/useAction';
+import { useActions } from '../../../../hooks/useAction';
 const Card = ({ data }) => {
     const { changeCardId } = useActions();
     const showModalWindow = (id) => {

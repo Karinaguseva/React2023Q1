@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import './index.scss';
-import Loader from '../Loader';
-import { useActions } from '../../hooks/useAction';
+import Loader from '../../../../components/Loader';
+import { useActions } from '../../../../hooks/useAction';
 const ModalWindow = ({ modalData, loading }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const { changeCardId } = useActions();
