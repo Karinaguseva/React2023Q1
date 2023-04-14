@@ -1,18 +1,22 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
-import Main from '../../pages/Main';
+import Main from '../..';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from '../../../../store/store';
 
 describe('Cards', () => {
   it('show cards after render', async () => {
     await act(async () => {
       render(
-        <MemoryRouter initialEntries={['/']}>
-          <Routes>
-            <Route path="/" element={<Main />}></Route>
-          </Routes>
-        </MemoryRouter>
+        <Provider store={store}>
+          <MemoryRouter initialEntries={['/']}>
+            <Routes>
+              <Route path="/" element={<Main />}></Route>
+            </Routes>
+          </MemoryRouter>
+        </Provider>
       );
     });
     let someCard = screen.queryByText(/Puffskein/);

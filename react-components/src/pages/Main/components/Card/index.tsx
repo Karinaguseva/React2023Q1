@@ -1,19 +1,17 @@
 import React from 'react';
 import './index.scss';
-import { CardPreview } from '../../../types/card';
-
-import { useSearchParams } from 'react-router-dom';
+import { CardPreview } from '../../../../types/card';
+import { useActions } from '../../../../hooks/useAction';
 
 interface CardProps {
   data: CardPreview;
 }
 
 const Card = ({ data }: CardProps) => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { changeCardId } = useActions();
 
   const showModalWindow = (id: string) => {
-    searchParams.set('id', id);
-    setSearchParams(searchParams);
+    changeCardId(id);
   };
 
   return (
