@@ -3,6 +3,8 @@
 // import { render, screen } from '@testing-library/react';
 // import ModalWindow from '.';
 // import { MemoryRouter, Route, Routes } from 'react-router-dom';
+// import { Provider } from 'react-redux';
+// import { store } from '../../../../store/store';
 // describe('Card', () => {
 //   it('render Card component', () => {
 //     const card = {
@@ -17,12 +19,14 @@
 //         'https://github.com/Karinaguseva/api-for-react2023Q1/blob/main/images/Puffskein.jpg?raw=true',
 //     };
 //     render(
-//       <MemoryRouter initialEntries={['/']}>
-//         <Routes>
-//           <Route path="/" element={<ModalWindow data={card} loading={false} />}></Route>
-//         </Routes>
-//       </MemoryRouter>
+//       <Provider store={store}>
+//         <MemoryRouter initialEntries={['/']}>
+//           <Routes>
+//             <Route path="/" element={<ModalWindow modalData={card} loading={false} />}></Route>
+//           </Routes>
+//         </MemoryRouter>
+//       </Provider>
 //     );
-//     expect(screen.getByText(card.name)).toBeInTheDocument();
+//     expect(screen.getByText(card?.name)).toBeInTheDocument();
 //   });
 // });

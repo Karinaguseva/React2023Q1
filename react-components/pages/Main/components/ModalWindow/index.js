@@ -1,22 +1,22 @@
 import React from 'react';
-import { useSearchParams } from 'react-router-dom';
 import './index.scss';
 import Loader from '../../../../components/Loader';
 import { useActions } from '../../../../hooks/useAction';
-const ModalWindow = ({ modalData, loading }) => {
-    const [searchParams, setSearchParams] = useSearchParams();
+import { useGetCardQuery } from '../../../../store/api/cards.api';
+import { useCardId } from '../../../../hooks/useCardId';
+const ModalWindow = () => {
+    const cardId = useCardId();
+    const { isLoading, data: card } = useGetCardQuery(cardId);
     const { changeCardId } = useActions();
     const close = () => {
-        searchParams.delete('id');
-        setSearchParams(searchParams);
         changeCardId(null);
     };
-    if (loading)
+    if (isLoading)
         return (React.createElement("div", { onClick: (e) => e.currentTarget === e.target && close(), className: 'modal' },
             React.createElement("div", { className: 'modal__wrapper' },
                 React.createElement(Loader, null))));
-    else if (modalData) {
-        const data = modalData[0];
+    else if (card) {
+        const data = card[0];
         return (React.createElement("div", { onClick: (e) => e.currentTarget === e.target && close(), className: 'modal' },
             React.createElement("div", { className: 'modal__wrapper' },
                 React.createElement("div", { onClick: close, className: "modal__close" }),

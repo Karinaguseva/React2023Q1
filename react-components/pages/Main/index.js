@@ -5,14 +5,14 @@ import Loader from '../../components/Loader';
 import { useGetCardsQuery } from '../../store/api/cards.api';
 import { useSearch } from '../../hooks/useSearch';
 import { useCardId } from '../../hooks/useCardId';
-import ModalPopup from './components/ModalPopup';
+import ModalWindow from './components/ModalWindow';
 const Main = () => {
     const search = useSearch();
-    const { isLoading, data: cards } = useGetCardsQuery({ search });
+    const { isLoading } = useGetCardsQuery({ search });
     const cardId = useCardId();
     return (React.createElement("main", { className: "main" },
         React.createElement(Search, null),
-        isLoading ? React.createElement(Loader, null) : React.createElement(Cards, { data: cards }),
-        cardId && React.createElement(ModalPopup, null)));
+        isLoading ? React.createElement(Loader, null) : React.createElement(Cards, null),
+        cardId && React.createElement(ModalWindow, null)));
 };
 export default Main;
