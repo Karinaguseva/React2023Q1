@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card as ICard } from '../../../../types/card';
-import { useSearchParams } from 'react-router-dom';
+
 import './index.scss';
 import Loader from '../../../../components/Loader';
 import { useActions } from '../../../../hooks/useAction';
@@ -11,11 +11,8 @@ interface ModalWindowProps {
 }
 
 const ModalWindow = ({ modalData, loading }: ModalWindowProps) => {
-  const [searchParams, setSearchParams] = useSearchParams();
   const { changeCardId } = useActions();
   const close = () => {
-    searchParams.delete('id');
-    setSearchParams(searchParams);
     changeCardId(null);
   };
 
