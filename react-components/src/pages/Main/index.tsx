@@ -7,18 +7,18 @@ import { useGetCardsQuery } from '../../store/api/cards.api';
 
 import { useSearch } from '../../hooks/useSearch';
 import { useCardId } from '../../hooks/useCardId';
-import ModalPopup from './components/ModalPopup';
+import ModalWindow from './components/ModalWindow';
 
 const Main = () => {
   const search = useSearch();
-  const { isLoading, data: cards } = useGetCardsQuery({ search });
+  const { isLoading } = useGetCardsQuery({ search });
   const cardId = useCardId();
 
   return (
     <main className="main">
       <Search />
-      {isLoading ? <Loader /> : <Cards data={cards} />}
-      {cardId && <ModalPopup />}
+      {isLoading ? <Loader /> : <Cards />}
+      {cardId && <ModalWindow />}
     </main>
   );
 };

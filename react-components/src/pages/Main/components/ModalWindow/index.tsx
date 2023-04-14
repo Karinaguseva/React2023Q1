@@ -1,22 +1,20 @@
 import React from 'react';
-import { Card as ICard } from '../../../../types/card';
-
 import './index.scss';
 import Loader from '../../../../components/Loader';
 import { useActions } from '../../../../hooks/useAction';
+import { useGetCardQuery } from '../../../../store/api/cards.api';
+import { useCardId } from '../../../../hooks/useCardId';
 
-interface ModalWindowProps {
-  modalData: ICard[] | null;
-  loading: boolean;
-}
-
-const ModalWindow = ({ modalData, loading }: ModalWindowProps) => {
+const ModalWindow = () => {
+  const cardId = useCardId();
+  const { isLoading, data: card } = useGetCardQuery(cardId);
   const { changeCardId } = useActions();
+
   const close = () => {
     changeCardId(null);
   };
 
-  if (loading)
+  if (isLoading)
     return (
       <div onClick={(e) => e.currentTarget === e.target && close()} className={'modal'}>
         <div className={'modal__wrapper'}>
@@ -24,8 +22,8 @@ const ModalWindow = ({ modalData, loading }: ModalWindowProps) => {
         </div>
       </div>
     );
-  else if (modalData) {
-    const data = modalData[0];
+  else if (card) {
+    const data = card[0];
     return (
       <div onClick={(e) => e.currentTarget === e.target && close()} className={'modal'}>
         <div className={'modal__wrapper'}>
