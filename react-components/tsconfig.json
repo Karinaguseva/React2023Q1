@@ -21,5 +21,10 @@
       "components/*": ["components/*"]
     }
   },
-  "include": ["./src/**/*", "styled.d.ts"]
+  "ts-node": {
+    "esm": true,
+    "transpileOnly": true,
+    "experimentalSpecifierResolution": "node"
+  },
+  "include": ["./src/**/*", "styled.d.ts", "server.tsx"]
 }
