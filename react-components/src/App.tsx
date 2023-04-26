@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+// import ReactDOM from 'react-dom/client';
 import {
   // BrowserRouter,
   // RouterProvider,
@@ -11,13 +11,13 @@ import {
 import About from 'pages/About';
 import Main from 'pages/Main';
 import NotFound404 from 'pages/NotFound404';
-import Root from './Root';
+// import Root from './Root';
 import './styles/style.css';
 
 import ROUTES from 'types/routes';
 import Forms from './pages/Forms/index';
-import { Provider } from 'react-redux';
-import { store } from './store/store';
+// import { Provider } from 'react-redux';
+// import { store } from './store/store';
 import Header from './components/Header';
 import Footer from './components/Footer';
 

@@ -17,6 +17,7 @@ const Main = () => {
   return (
     <main className="main">
       <Search />
+      {/* <Cards /> */}
       {isLoading ? <Loader /> : <Cards />}
       {cardId && <ModalWindow />}
     </main>

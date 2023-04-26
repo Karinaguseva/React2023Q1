@@ -20,7 +20,7 @@ p {
 
 #root {
   padding: 0 10px;
-  background-image: url(./../../../public/assets/images/mainBg.jpeg);
+  background-image: url(./../../assets/mainBg.jpeg);
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;

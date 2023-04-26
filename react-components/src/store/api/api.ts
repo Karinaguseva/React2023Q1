@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { HYDRATE } from 'next-redux-wrapper';
+// import { HYDRATE } from 'next-redux-wrapper';
 
 const API_URL = 'https://my-json-server.typicode.com/karinaguseva/api-for-react2023Q1/cards';
 
