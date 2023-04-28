@@ -1,8 +1,8 @@
-import { readFile } from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import express from 'express';
 import { createServer as createViteServer } from 'vite';
+import fs from 'fs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -21,27 +21,26 @@ async function createServer() {
   app.use('*', async (req, res, next) => {
     const url = req.originalUrl;
     try {
-      let modelPage = await readFile(path.resolve(__dirname, 'index.html'), 'utf-8');
-      modelPage = await vite.transformIndexHtml(url, modelPage);
-
-      const parts = modelPage.split('<!--ssr-body-->');
+      let page = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf-8');
+      page = await vite.transformIndexHtml(url, page);
+      const htmlParts = page.split('<!--ssr-body-->');
 
       const { render } = await vite.ssrLoadModule('/src/entry-server.tsx');
+
       const { pipe } = await render(url, {
         onShellReady() {
-          res.write(parts[0]);
+          res.write(htmlParts[0]);
           pipe(res);
         },
         onAllReady() {
-          res.write(parts[1]);
+          res.write(htmlParts[1]);
           res.end();
         },
       });
     } catch (e) {
-      if (e instanceof Error) {
-        vite.ssrFixStacktrace(e);
-        next(e);
-      }
+      const err = e as Error;
+      vite.ssrFixStacktrace(err);
+      next(err);
     }
   });
 

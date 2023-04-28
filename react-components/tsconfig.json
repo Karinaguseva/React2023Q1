@@ -7,6 +7,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noImplicitAny": true,
+    "allowJs": true,
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -26,5 +27,5 @@
     "transpileOnly": true,
     "experimentalSpecifierResolution": "node"
   },
-  "include": ["./src/**/*", "styled.d.ts", "server.tsx"]
+  "include": ["./src/**/*", "styled.d.ts", "server.ts"]
 }

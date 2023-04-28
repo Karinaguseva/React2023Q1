@@ -1,25 +1,20 @@
 import React from 'react';
-import { hydrateRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { App } from './App';
 import { store } from './store/store';
-import './index.scss';
 import { BrowserRouter } from 'react-router-dom';
+import { Store } from 'redux';
 
-const rootElement = document.getElementById('root');
-
-// if (rootElement)
-//   createRoot(rootElement).render(
-//     <Provider store={store}>
-//       <App />
-//     </Provider>
-//   );
-if (rootElement)
-  hydrateRoot(
-    document.getElementById('root') as HTMLElement,
-    <Provider store={store}>
-      <BrowserRouter>
+function entryClient(store: Store) {
+  ReactDOM.hydrateRoot(
+    document.getElementById('root') as Element,
+    <BrowserRouter>
+      <Provider store={store}>
         <App />
-      </BrowserRouter>
-    </Provider>
+      </Provider>
+    </BrowserRouter>
   );
+}
+
+entryClient(store);

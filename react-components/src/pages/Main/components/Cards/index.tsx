@@ -6,10 +6,8 @@ import { useSearch } from '../../../../hooks/useSearch';
 import { useGetCardsQuery } from '../../../../store/api/cards.api';
 
 const Cards = () => {
-  console.log('cards');
   const search = useSearch();
   const { data: cards } = useGetCardsQuery({ search });
-  console.log(cards);
 
   if (!cards.length)
     return (
