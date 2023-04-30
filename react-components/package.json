@@ -13,7 +13,7 @@
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "test:cypress": "start-server-and-test dev http://localhost:3000 cypress",
-    "cypress": "cypress open && nyc report --reporter=text --reporter=text-summary",
+    "cypress": "cypress run && nyc report --reporter=text --reporter=text-summary",
     "cypress:coverage": "npx nyc report --reporter=text --reporter=text-summary",
     "cypress:clean-coverage": "npx rimraf cypress-coverage"
   },
