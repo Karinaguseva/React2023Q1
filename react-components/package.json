@@ -13,9 +13,9 @@
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "test:cypress": "start-server-and-test dev http://localhost:3000 cypress",
-    "cypress": "cypress run && nyc report --reporter=text --reporter=text-summary",
+    "cypress": "cypress open && nyc report --reporter=text --reporter=text-summary",
     "cypress:coverage": "npx nyc report --reporter=text --reporter=text-summary",
-    "cy:clean-coverage": "npx rimraf cypress-coverage"
+    "cypress:clean-coverage": "npx rimraf cypress-coverage"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
