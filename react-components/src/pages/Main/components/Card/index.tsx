@@ -15,7 +15,7 @@ const Card = ({ data }: CardProps) => {
   };
 
   return (
-    <>
+    <div data-cy="card">
       <div
         className="preview"
         onClick={() => {
@@ -31,7 +31,7 @@ const Card = ({ data }: CardProps) => {
         ></img>
         <div className="preview__title">{data.name}</div>
       </div>
-    </>
+    </div>
   );
 };
 
