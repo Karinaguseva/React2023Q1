@@ -8,5 +8,6 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
   }),
+
   endpoints: () => ({}),
 });

@@ -4,13 +4,16 @@ import { App } from './App';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('App', () => {
   it('renders Forms component on navigate', async () => {
     render(
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <BrowserRouter>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </BrowserRouter>
     );
     const main = screen.getByText(/Main page/i);
     expect(main).toBeInTheDocument();

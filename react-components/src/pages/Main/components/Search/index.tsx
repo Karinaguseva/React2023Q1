@@ -22,6 +22,7 @@ const Search = () => {
           value={value}
           onChange={(event) => setValue(event.currentTarget.value)}
           onKeyUp={(event) => event.key === 'Enter' && applySearch(value)}
+          data-cy="search"
         ></input>
         <div
           className="search__delete"
